@@ -1,0 +1,76 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionWrap from "@/components/SectionWrap.astro";
+
+const title = "Seguridad de la información - UnDerecho";
+const description = "Política del Sistema de Gestión de Seguridad y Privacidad de la Información de UnDerecho.";
+---
+
+<BaseLayout title={title} description={description}>
+  <SectionWrap backgroundColor="gray" padding="xl">
+    <article class="max-w-3xl mx-auto">
+      <h1 class="text-3xl md:text-4xl font-bold text-charcoal-700 mb-6 font-serif text-center">
+        Seguridad de la información
+      </h1>
+      <div class="w-16 h-1 bg-gold-500 mx-auto mb-10"></div>
+
+      <section class="mb-10">
+        <h2 class="text-xl font-bold text-charcoal-700 mb-4 font-serif">1. Generalidades</h2>
+        <h3 class="text-lg font-semibold text-charcoal-700 mb-2">1.1. Objetivo</h3>
+        <p class="text-charcoal-600 leading-relaxed mb-2">
+          Establecer la Política del Sistema de Gestión de Seguridad y Privacidad de la Información (SGSPI) de UN DERECHO (NIT: 901980569 - 0), garantizando que:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-charcoal-600 leading-relaxed mb-4">
+          <li>Sea apropiada al propósito de la firma y a su modelo de orientación jurídica digital.</li>
+          <li>Provea una base sólida para el establecimiento de los objetivos relacionados con la ciberseguridad y la privacidad de los datos de nuestros usuarios.</li>
+          <li>Incluya el compromiso ineludible de satisfacer los requerimientos legales y regulatorios aplicables en Colombia.</li>
+          <li>Promueva la mejora continua de los procesos tecnológicos y operativos de la firma.</li>
+        </ul>
+        <h3 class="text-lg font-semibold text-charcoal-700 mb-2">1.2. Alcance</h3>
+        <p class="text-charcoal-600 leading-relaxed mb-4">
+          Este documento contiene la Política adoptada por UN DERECHO y es de estricto cumplimiento para todos sus empleados, abogados asociados, proveedores tecnológicos, contratistas y cualquier tercero que tenga acceso a los activos de información de la firma.
+        </p>
+        <h3 class="text-lg font-semibold text-charcoal-700 mb-2">1.3. Definiciones Clave</h3>
+        <dl class="space-y-3 text-charcoal-600 leading-relaxed mb-4">
+          <dt class="font-semibold text-charcoal-700">Activo de Información:</dt>
+          <dd class="ml-4 mb-2">Cualquier información, sistema, plataforma (sitio web, chat, correos) o persona que tenga valor para el funcionamiento de UN DERECHO.</dd>
+          <dt class="font-semibold text-charcoal-700">Confidencialidad:</dt>
+          <dd class="ml-4 mb-2">Propiedad que garantiza que la información de los casos y de los usuarios no esté disponible ni sea revelada a personas o procesos no autorizados.</dd>
+          <dt class="font-semibold text-charcoal-700">Integridad:</dt>
+          <dd class="ml-4 mb-2">Propiedad de salvaguardar la exactitud, completitud y veracidad de la información y los expedientes digitales.</dd>
+          <dt class="font-semibold text-charcoal-700">Disponibilidad:</dt>
+          <dd class="ml-4 mb-2">Propiedad que asegura que la información y las plataformas de consulta sean accesibles y utilizables cuando un usuario o abogado autorizado lo requiera.</dd>
+          <dt class="font-semibold text-charcoal-700">Incidente de Seguridad:</dt>
+          <dd class="ml-4 mb-2">Evento adverso en el entorno informático que compromete la confidencialidad, integridad o disponibilidad de la información (ej. accesos no autorizados, caídas del sistema, filtraciones).</dd>
+          <dt class="font-semibold text-charcoal-700">Gestión del Riesgo:</dt>
+          <dd class="ml-4">Actividades coordinadas para identificar, controlar y mitigar las amenazas que puedan afectar la información de la firma.</dd>
+        </dl>
+        <h3 class="text-lg font-semibold text-charcoal-700 mb-2">1.4. Responsabilidades</h3>
+        <p class="text-charcoal-600 leading-relaxed">
+          La gestión, revisión y auditoría de esta política estará a cargo de la Dirección de UN DERECHO o del Oficial de Seguridad de la Información designado. Es responsabilidad de todo el personal y aliados estratégicos acatar estrictamente los parámetros aquí especificados.
+        </p>
+      </section>
+
+      <section class="mb-10">
+        <h2 class="text-xl font-bold text-charcoal-700 mb-4 font-serif">2. Política de Seguridad y Privacidad de la Información</h2>
+        <p class="text-charcoal-600 leading-relaxed mb-4">
+          Con el propósito de cumplir nuestra misión de democratizar el acceso a la justicia mediante herramientas digitales (online), UN DERECHO ha adoptado este Sistema de Gestión de Seguridad y Privacidad de la Información.
+        </p>
+        <p class="text-charcoal-600 leading-relaxed mb-4">
+          Este sistema respalda la labor de nuestro equipo de abogados y tiene como objetivo primordial asegurar la gestión adecuada de los riesgos cibernéticos y operativos, garantizando la confidencialidad del secreto profesional y la protección frente a amenazas digitales.
+        </p>
+        <p class="text-charcoal-600 leading-relaxed mb-2">
+          En este contexto, UN DERECHO se compromete formalmente a:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-charcoal-600 leading-relaxed">
+          <li><strong>Preservar la tríada de la seguridad:</strong> Garantizar en todo momento la Confidencialidad, Integridad y Disponibilidad de la información, reconociéndola como el activo más crítico para la prestación de nuestros servicios jurídicos.</li>
+          <li><strong>Gestión de riesgos:</strong> Identificar, analizar, tratar y monitorear constantemente las vulnerabilidades tecnológicas que puedan afectar la información, garantizando el cumplimiento de los requisitos legales y contractuales.</li>
+          <li><strong>Cultura de ciberseguridad:</strong> Fomentar una cultura de protección de datos mediante la capacitación continua de nuestros abogados y colaboradores en buenas prácticas digitales, minimizando el riesgo de incidentes por error humano.</li>
+          <li><strong>Resiliencia y Continuidad:</strong> Fortalecer la resiliencia de nuestros canales de atención digital mediante la implementación de planes de contingencia y copias de seguridad (backups), asegurando que el servicio no se detenga ante fallas técnicas.</li>
+          <li><strong>Cumplimiento normativo:</strong> Garantizar el tratamiento adecuado y seguro de los datos personales y sensibles, en estricta concordancia con la Ley 1581 de 2012 y los estándares internacionales de privacidad.</li>
+          <li><strong>Mejora continua:</strong> Evaluar y actualizar periódicamente los controles de seguridad, auditando nuestros procesos y gestionando de forma oportuna cualquier incidente para reducir su impacto.</li>
+        </ul>
+      </section>
+    </article>
+  </SectionWrap>
+</BaseLayout>
