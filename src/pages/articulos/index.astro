@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionWrap from "@/components/SectionWrap.astro";
+
+const title = "Artículos - UnDerecho";
+const description =
+  "Artículos y guías legales sobre derechos de petición, protección al consumidor, tutela de derechos y más.";
+---
+<script>
+  import { loadArticulosList } from "@/scripts/insightsFetch";
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadArticulosList);
+  } else {
+    loadArticulosList();
+  }
+</script>
+
+<BaseLayout title={title} description={description}>
+  <SectionWrap backgroundColor="white" padding="xl">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Artículos y Guías Legales
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Información útil y práctica sobre tus derechos y cómo ejercerlos
+      </p>
+    </header>
+
+    <div id="articulos-list-loading" class="text-center py-12">
+      <p class="text-lg text-gray-600">Cargando artículos…</p>
+    </div>
+    <div id="articulos-list-empty" class="text-center py-12 hidden">
+      <p class="text-lg text-gray-600">
+        No hay artículos disponibles en este momento.
+      </p>
+    </div>
+    <div
+      id="articulos-list-grid"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"
+    ></div>
+  </SectionWrap>
+</BaseLayout>
