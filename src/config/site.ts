@@ -16,6 +16,7 @@ export const SITE_CONFIG = {
   whatsappNumber: WHATSAPP_NUMBER,
   whatsappUrl: `https://wa.me/${WHATSAPP_NUMBER}`,
   whatsappUrlConsulta: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, me gustaría agendar una consulta.')}`,
+  youtubeUrl: 'https://www.youtube.com/channel/UCJGlqpO8bcYxS2ZX07bZaCg',
 } as const;
 
 export type SiteConfig = typeof SITE_CONFIG;
