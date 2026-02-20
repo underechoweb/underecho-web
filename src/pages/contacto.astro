@@ -1,0 +1,640 @@
+---
+import PlainLayout from "@/layouts/PlainLayout.astro";
+import { SITE_CONFIG } from "@/config/site";
+import logo_original from "@/assets/sin_fondo/logo_original.webp";
+
+const title = "Contacto - UnDerecho";
+const description =
+  "Contáctanos y recibe una primera orientación gratuita. Juntos haremos que tus derechos sean escuchados.";
+
+const whatsappNumber = "573180699745";
+const whatsappDisplay = "+57 318 0699745";
+const email = "underecho.abog@gmail.com";
+const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+---
+
+<PlainLayout title={title} description={description} fullWidth={true}>
+  <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      <section
+        class="flex flex-col items-center text-center mb-8 lg:mb-0"
+        aria-labelledby="contact-info-title"
+      >
+        <div>
+          <img
+            src={logo_original.src}
+            alt={SITE_CONFIG.name}
+            class="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto mx-auto"
+            width={logo_original.width}
+            height={logo_original.height}
+            loading="eager"
+          />
+        </div>
+
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mb-8 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:bg-[#20BA5A] hover:scale-105 transition-all focus:outline-none focus:ring-4 focus:ring-[#25D366] focus:ring-offset-2"
+          aria-label="Contactar por WhatsApp"
+        >
+          <svg
+            class="w-9 h-9 text-white"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+            ></path>
+          </svg>
+        </a>
+
+        <div class="space-y-5 w-full">
+          <div>
+            <p class="text-gray-900 font-bold text-base md:text-lg">
+              Tel: <a
+                href={`tel:${whatsappDisplay.replace(/\s/g, "")}`}
+                class="hover:text-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-600 rounded"
+                >{whatsappDisplay}</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <p class="text-gray-900 font-bold text-base md:text-lg">
+              Email: <a
+                href={`mailto:${email}`}
+                class="hover:text-primary-700 transition-colors break-all focus:outline-none focus:ring-2 focus:ring-primary-600 rounded"
+                >{email}</a
+              >
+            </p>
+          </div>
+
+          <div>
+            <p class="text-gray-900 font-bold text-base md:text-lg">
+              Razón social: Un Derecho SAS - NIT 901980569 0
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="lg:pl-8" aria-labelledby="form-title">
+        <header class="mb-8">
+          <h2
+            id="form-title"
+            class="text-2xl md:text-3xl font-bold text-gray-900 mb-3"
+          >
+            Cuéntanos tu caso y recibe asesoría legal experta.
+          </h2>
+          <p class="text-lg md:text-xl text-gray-700">
+            ¡Tu bienestar es nuestra misión!
+          </p>
+        </header>
+
+        <form class="space-y-5" id="contact-form" novalidate>
+          <div>
+            <label
+              for="nombre"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
+              Nombre <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              required
+              minlength="2"
+              maxlength="50"
+              pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-colors"
+              aria-required="true"
+              aria-describedby="nombre-error"
+            />
+            <p
+              id="nombre-error"
+              class="hidden mt-1 text-sm text-red-600"
+              role="alert"
+            >
+            </p>
+          </div>
+
+          <div>
+            <label
+              for="telefono"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
+              Teléfono <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              required
+              pattern="^\d{10}$"
+              maxlength="10"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-colors"
+              aria-required="true"
+              aria-describedby="telefono-error"
+            />
+            <p
+              id="telefono-error"
+              class="hidden mt-1 text-sm text-red-600"
+              role="alert"
+            >
+            </p>
+          </div>
+
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
+              Email <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              minlength="5"
+              maxlength="100"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-colors"
+              aria-required="true"
+              aria-describedby="email-error"
+            />
+            <p
+              id="email-error"
+              class="hidden mt-1 text-sm text-red-600"
+              role="alert"
+            >
+            </p>
+          </div>
+
+          <div>
+            <label
+              for="mensaje"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
+              Mensaje
+            </label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="5"
+              maxlength="1000"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-colors resize-y"
+              aria-describedby="mensaje-error"></textarea>
+            <p
+              id="mensaje-error"
+              class="hidden mt-1 text-sm text-red-600"
+              role="alert"
+            >
+            </p>
+            <p class="mt-1 text-xs text-gray-500">Máximo 1000 caracteres</p>
+          </div>
+
+          <div class="flex items-start">
+            <input
+              type="checkbox"
+              id="terminos"
+              name="terminos"
+              required
+              class="mt-1 mr-3 w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-600"
+              aria-required="true"
+            />
+            <label for="terminos" class="text-sm text-gray-700">
+              He leído y acepto los{" "}
+              <a
+                href="/terminos-y-condiciones"
+                class="text-primary-700 hover:text-primary-800 underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Términos y condiciones
+              </a>
+              {" "}y la{" "}
+              <a
+                href="/politica-tratamiento-datos"
+                class="text-primary-700 hover:text-primary-800 underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Política de tratamiento de datos
+              </a>
+              .
+            </label>
+          </div>
+
+          <p class="text-xs text-gray-600">
+            Los datos personales facilitados serán tratados por Un Derecho como
+            responsable del tratamiento, con la finalidad de atender su
+            solicitud y remitirle información comercial relacionada con nuestros
+            servicios. Puede ejercer sus derechos de acceso, rectificación,
+            supresión, oposición, limitación del tratamiento y portabilidad
+            mediante correo electrónico a {email}. Para más información,
+            consulte nuestra{" "}
+            <a
+              href="/politica-tratamiento-datos"
+              class="text-primary-700 hover:text-primary-800 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Política de Privacidad
+            </a>
+            .
+          </p>
+
+          <div
+            id="form-message"
+            class="hidden p-4 rounded-lg text-sm font-medium"
+          >
+          </div>
+
+          <button
+            type="submit"
+            id="submit-button"
+            disabled
+            class="w-full bg-gray-400 text-white px-6 py-3 rounded-lg font-semibold cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span id="submit-text">Enviar</span>
+            <span id="submit-loading" class="hidden">Enviando...</span>
+          </button>
+        </form>
+      </section>
+    </div>
+  </div>
+</PlainLayout>
+
+<script>
+  import {
+    validateNombre,
+    validateTelefono,
+    validateEmail,
+    validateMensaje,
+    trimValue,
+    cleanTelefono,
+  } from "@/services/validationService";
+
+  import {
+    initEmailJS,
+    sendEmail,
+    getEmailJSConfig,
+  } from "@/services/emailService";
+
+  import type { EmailTemplateParams } from "@/types";
+
+  // Inicializar EmailJS
+  const emailConfig = getEmailJSConfig();
+  initEmailJS(emailConfig.publicKey);
+
+  const form = document.getElementById(
+    "contact-form",
+  ) as HTMLFormElement | null;
+  const submitButton = document.getElementById(
+    "submit-button",
+  ) as HTMLButtonElement | null;
+  const submitText = document.getElementById(
+    "submit-text",
+  ) as HTMLSpanElement | null;
+  const submitLoading = document.getElementById(
+    "submit-loading",
+  ) as HTMLSpanElement | null;
+  const formMessage = document.getElementById(
+    "form-message",
+  ) as HTMLDivElement | null;
+
+  // Referencias a los campos
+  const nombreInput = document.getElementById(
+    "nombre",
+  ) as HTMLInputElement | null;
+  const telefonoInput = document.getElementById(
+    "telefono",
+  ) as HTMLInputElement | null;
+  const emailInput = document.getElementById(
+    "email",
+  ) as HTMLInputElement | null;
+  const mensajeTextarea = document.getElementById(
+    "mensaje",
+  ) as HTMLTextAreaElement | null;
+  const terminosCheckbox = document.getElementById(
+    "terminos",
+  ) as HTMLInputElement | null;
+
+  // Referencias a los mensajes de error
+  const nombreError = document.getElementById(
+    "nombre-error",
+  ) as HTMLParagraphElement | null;
+  const telefonoError = document.getElementById(
+    "telefono-error",
+  ) as HTMLParagraphElement | null;
+  const emailError = document.getElementById(
+    "email-error",
+  ) as HTMLParagraphElement | null;
+  const mensajeError = document.getElementById(
+    "mensaje-error",
+  ) as HTMLParagraphElement | null;
+
+  function showFieldError(
+    field: HTMLElement | null,
+    errorElement: HTMLElement | null,
+    message: string,
+  ) {
+    if (!field || !errorElement) return;
+    field.classList.add("border-red-500", "focus:ring-red-500");
+    field.classList.remove("border-gray-300", "focus:ring-primary-600");
+    errorElement.textContent = message;
+    errorElement.classList.remove("hidden");
+  }
+
+  function clearFieldError(
+    field: HTMLElement | null,
+    errorElement: HTMLElement | null,
+  ) {
+    if (!field || !errorElement) return;
+    field.classList.remove("border-red-500", "focus:ring-red-500");
+    field.classList.add("border-gray-300", "focus:ring-primary-600");
+    errorElement.classList.add("hidden");
+    errorElement.textContent = "";
+  }
+
+  // Wrappers de validación que actualizan la UI
+  function validateNombreField(value: string, showError = true): boolean {
+    if (!nombreInput || !nombreError) return false;
+
+    const result = validateNombre(value, showError);
+
+    if (!result.isValid) {
+      if (showError && result.error) {
+        if (value !== trimValue(value)) {
+          nombreInput.value = trimValue(value);
+        }
+        showFieldError(nombreInput, nombreError, result.error);
+      }
+      return false;
+    }
+
+    clearFieldError(nombreInput, nombreError);
+    return true;
+  }
+
+  function validateTelefonoField(value: string, showError = true): boolean {
+    if (!telefonoInput || !telefonoError) return false;
+
+    const result = validateTelefono(value, showError);
+
+    if (!result.isValid) {
+      if (showError && result.error) {
+        telefonoInput.value = cleanTelefono(value);
+        showFieldError(telefonoInput, telefonoError, result.error);
+      }
+      return false;
+    }
+
+    clearFieldError(telefonoInput, telefonoError);
+    return true;
+  }
+
+  function validateEmailField(value: string, showError = true): boolean {
+    if (!emailInput || !emailError) return false;
+
+    const result = validateEmail(value, showError);
+
+    if (!result.isValid) {
+      if (showError && result.error) {
+        if (value !== trimValue(value)) {
+          emailInput.value = trimValue(value);
+        }
+        showFieldError(emailInput, emailError, result.error);
+      }
+      return false;
+    }
+
+    clearFieldError(emailInput, emailError);
+    return true;
+  }
+
+  function validateMensajeField(value: string, showError = true): boolean {
+    if (!mensajeTextarea || !mensajeError) return true;
+
+    const result = validateMensaje(value, showError);
+
+    if (!result.isValid) {
+      if (showError && result.error) {
+        showFieldError(mensajeTextarea, mensajeError, result.error);
+      }
+      return false;
+    }
+
+    clearFieldError(mensajeTextarea, mensajeError);
+    return true;
+  }
+
+  function updateSubmitButton() {
+    if (
+      !submitButton ||
+      !nombreInput ||
+      !telefonoInput ||
+      !emailInput ||
+      !terminosCheckbox
+    )
+      return;
+
+    const isNombreValid = validateNombre(nombreInput.value, false).isValid;
+    const isTelefonoValid = validateTelefono(
+      telefonoInput.value,
+      false,
+    ).isValid;
+    const isEmailValid = validateEmail(emailInput.value, false).isValid;
+    const isTerminosValid = terminosCheckbox.checked;
+
+    const allFieldsValid =
+      isNombreValid &&
+      isTelefonoValid &&
+      isEmailValid &&
+      isTerminosValid;
+
+    if (allFieldsValid) {
+      submitButton.disabled = false;
+      submitButton.classList.remove("bg-gray-400", "cursor-not-allowed");
+      submitButton.classList.add("bg-primary-700", "hover:bg-primary-800");
+    } else {
+      submitButton.disabled = true;
+      submitButton.classList.add("bg-gray-400", "cursor-not-allowed");
+      submitButton.classList.remove("bg-primary-700", "hover:bg-primary-800");
+    }
+  }
+
+  if (nombreInput) {
+    nombreInput.addEventListener("blur", () => {
+      if (nombreInput) {
+        validateNombreField(nombreInput.value, true);
+        updateSubmitButton();
+      }
+    });
+    nombreInput.addEventListener("input", () => {
+      clearFieldError(nombreInput, nombreError);
+      updateSubmitButton();
+    });
+  }
+
+  if (telefonoInput) {
+    telefonoInput.addEventListener("input", (e) => {
+      const target = e.target as HTMLInputElement | null;
+      if (target) {
+        target.value = cleanTelefono(target.value);
+      }
+      clearFieldError(telefonoInput, telefonoError);
+      updateSubmitButton();
+    });
+    telefonoInput.addEventListener("blur", () => {
+      if (telefonoInput) {
+        validateTelefonoField(telefonoInput.value, true);
+        updateSubmitButton();
+      }
+    });
+  }
+
+  if (emailInput) {
+    emailInput.addEventListener("blur", () => {
+      if (emailInput) {
+        validateEmailField(emailInput.value, true);
+        updateSubmitButton();
+      }
+    });
+    emailInput.addEventListener("input", () => {
+      clearFieldError(emailInput, emailError);
+      updateSubmitButton();
+    });
+  }
+
+  if (mensajeTextarea) {
+    mensajeTextarea.addEventListener("input", () => {
+      if (mensajeTextarea) {
+        validateMensajeField(mensajeTextarea.value, false);
+      }
+    });
+  }
+
+  if (terminosCheckbox) {
+    terminosCheckbox.addEventListener("change", () => {
+      updateSubmitButton();
+    });
+  }
+
+  function showMessage(text: string, type: "success" | "error" = "success") {
+    if (!formMessage) return;
+
+    formMessage.textContent = text;
+    formMessage.className = `p-4 rounded-lg text-sm font-medium ${
+      type === "success"
+        ? "bg-green-100 text-green-800 border border-green-300"
+        : "bg-red-100 text-red-800 border border-red-300"
+    }`;
+    formMessage.classList.remove("hidden");
+
+    formMessage.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    if (type === "success") {
+      setTimeout(() => {
+        if (formMessage) {
+          formMessage.classList.add("hidden");
+        }
+      }, 5000);
+    }
+  }
+
+  function setLoading(isLoading: boolean) {
+    if (!submitButton || !submitText || !submitLoading) return;
+
+    if (isLoading) {
+      submitButton.disabled = true;
+      submitText.classList.add("hidden");
+      submitLoading.classList.remove("hidden");
+    } else {
+      submitText.classList.remove("hidden");
+      submitLoading.classList.add("hidden");
+      updateSubmitButton();
+    }
+  }
+
+  if (
+    form &&
+    nombreInput &&
+    telefonoInput &&
+    emailInput &&
+    mensajeTextarea &&
+    terminosCheckbox
+  ) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (formMessage) {
+        formMessage.classList.add("hidden");
+      }
+
+      const isNombreValid = validateNombreField(nombreInput.value, true);
+      const isTelefonoValid = validateTelefonoField(telefonoInput.value, true);
+      const isEmailValid = validateEmailField(emailInput.value, true);
+      const isMensajeValid = validateMensajeField(mensajeTextarea.value, true);
+      const isTerminosValid = terminosCheckbox.checked;
+
+      if (!isTerminosValid) {
+        showMessage(
+          "Debes aceptar los términos y condiciones para continuar.",
+          "error",
+        );
+        return;
+      }
+
+      if (
+        !isNombreValid ||
+        !isTelefonoValid ||
+        !isEmailValid ||
+        !isMensajeValid
+      ) {
+        showMessage(
+          "Por favor corrige los errores en el formulario antes de enviar.",
+          "error",
+        );
+        return;
+      }
+
+      const templateParams: EmailTemplateParams = {
+        nombre: trimValue(nombreInput.value),
+        telefono: cleanTelefono(telefonoInput.value),
+        email: trimValue(emailInput.value),
+        mensaje: trimValue(mensajeTextarea.value) || "",
+      };
+
+      setLoading(true);
+
+      // Enviar email usando el servicio
+      const result = await sendEmail(emailConfig, templateParams);
+
+      if (result.success) {
+        showMessage(result.message || "¡Mensaje enviado con éxito!", "success");
+        form.reset();
+        const fields = [
+          nombreInput,
+          telefonoInput,
+          emailInput,
+          mensajeTextarea,
+        ];
+        fields.forEach((field) => {
+          if (field) {
+            const errorId = field.id + "-error";
+            const errorElement = document.getElementById(errorId);
+            if (errorElement) clearFieldError(field, errorElement);
+          }
+        });
+        updateSubmitButton();
+      } else {
+        showMessage(result.error || "Error al enviar el mensaje", "error");
+      }
+
+      setLoading(false);
+    });
+  }
+</script>
