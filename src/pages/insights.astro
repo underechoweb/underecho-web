@@ -1,0 +1,373 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionWrap from "@/components/SectionWrap.astro";
+import { SITE_CONFIG } from "@/config/site";
+
+const title = "Insights - UnDerecho";
+const description =
+  "Le brindamos nuestro conocimiento y experiencia a través de herramientas digitales útiles.";
+---
+<script>
+  import { loadInsights } from "@/scripts/insightsFetch";
+  import { loadYouTubeVideos } from "@/scripts/youtubeFetch";
+
+  const youtubeConfig = {
+    apiKey: import.meta.env.PUBLIC_YOUTUBE_API_KEY ?? "",
+    playlistId: import.meta.env.PUBLIC_YOUTUBE_PLAYLIST_ID ?? "",
+  };
+
+  function init() {
+    loadInsights();
+    loadYouTubeVideos(youtubeConfig);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+</script>
+
+<BaseLayout title={title} description={description}>
+  <section
+    id="insights-top"
+    class="relative min-h-[400px] md:min-h-[500px] overflow-visible bg-gradient-to-br from-charcoal-700 via-charcoal-600 to-charcoal-800 pb-16 md:pb-20"
+  >
+    <div class="absolute inset-0 opacity-20">
+      <div
+        class="w-full h-full bg-gradient-to-r from-gold-600/10 to-transparent"
+      >
+      </div>
+    </div>
+
+    <div
+      class="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 h-full min-h-[400px] md:min-h-[500px] flex items-center"
+    >
+      <div class="py-20 md:py-32">
+        <h1
+          class="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 uppercase tracking-tight font-serif"
+        >
+          Insights
+        </h1>
+        <div class="w-24 h-1 bg-gold-500 mb-6"></div>
+        <p class="text-xl md:text-2xl text-white max-w-2xl leading-relaxed">
+          Le brindamos nuestro conocimiento y experiencia a través de
+          herramientas digitales útiles.
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce"
+    >
+      <svg
+        class="w-6 h-6 text-white"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <div class="relative -mt-16 md:-mt-20 z-30">
+    <div class="container mx-auto px-4">
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto"
+      >
+        <a
+          href="#noticias"
+          class="bg-white border-b-4 border-gold-500 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 text-center group"
+        >
+          <div class="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+            <svg
+              class="w-8 h-8 text-gold-500 group-hover:text-gold-600 transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+              ></path>
+            </svg>
+          </div>
+          <div class="w-12 h-0.5 bg-gold-500 mx-auto mb-3"></div>
+          <h3
+            class="text-sm md:text-base font-bold text-charcoal-700 uppercase"
+          >
+            Noticias
+          </h3>
+        </a>
+
+        <a
+          href="#articulos"
+          class="bg-white border-b-4 border-beige-400 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 text-center group"
+        >
+          <div class="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+            <svg
+              class="w-8 h-8 text-beige-600 group-hover:text-beige-700 transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
+            </svg>
+          </div>
+          <div class="w-12 h-0.5 bg-beige-400 mx-auto mb-3"></div>
+          <h3
+            class="text-sm md:text-base font-bold text-charcoal-700 uppercase"
+          >
+            Artículos
+          </h3>
+        </a>
+
+        <a
+          href="#redes-sociales"
+          class="bg-white border-b-4 border-beige-400 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 text-center group"
+        >
+          <div class="w-12 h-12 mx-auto mb-3 flex items-center justify-center">
+            <svg
+              class="w-8 h-8 text-[#ff0000] group-hover:text-[#cc0000] transition-colors"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </div>
+          <div class="w-12 h-0.5 bg-beige-400 mx-auto mb-3"></div>
+          <h3
+            class="text-sm md:text-base font-bold text-charcoal-700 uppercase"
+          >
+            Videos
+          </h3>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <SectionWrap
+    id="noticias"
+    backgroundColor="white"
+    padding="xl"
+    class="pt-16 md:pt-20"
+  >
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-primary-500 mb-2 font-serif"
+        >
+          NOTICIAS
+        </h2>
+        <p class="text-sm text-charcoal-500">{SITE_CONFIG.name}</p>
+      </div>
+      <a
+        href="#insights-top"
+        class="text-primary-500 hover:text-primary-600 text-sm font-semibold uppercase transition-colors"
+      >
+        Insights ^
+      </a>
+    </div>
+
+    <div id="insights-noticias-loading" class="text-center py-12">
+      <p class="text-lg text-charcoal-500">Cargando noticias…</p>
+    </div>
+    <div id="insights-noticias-empty" class="text-center py-12 hidden">
+      <p class="text-lg text-charcoal-500">
+        No hay noticias disponibles en este momento.
+      </p>
+    </div>
+    <div
+      id="insights-noticias-grid"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"
+    ></div>
+
+    <div id="insights-noticias-more" class="text-center mt-12 hidden">
+      <a
+        href="/noticias"
+        class="text-primary-500 hover:text-primary-600 font-semibold uppercase text-sm"
+      >
+        Ver más noticias →
+      </a>
+    </div>
+  </SectionWrap>
+
+  <SectionWrap id="articulos" backgroundColor="gray" padding="xl">
+    <div class="mb-8">
+      <h2
+        class="text-3xl md:text-4xl font-bold text-charcoal-700 mb-4 font-serif"
+      >
+        Artículos y Guías
+      </h2>
+      <p class="text-lg text-charcoal-500 max-w-2xl">
+        Información útil y práctica sobre tus derechos y cómo ejercerlos
+      </p>
+    </div>
+
+    <div id="insights-articulos-loading" class="text-center py-12">
+      <p class="text-lg text-charcoal-500">Cargando artículos…</p>
+    </div>
+    <div id="insights-articulos-empty" class="text-center py-12 hidden">
+      <p class="text-lg text-charcoal-500">
+        No hay artículos disponibles en este momento.
+      </p>
+    </div>
+    <div
+      id="insights-articulos-grid"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"
+    ></div>
+
+    <div id="insights-articulos-more" class="text-center mt-12 hidden">
+      <a
+        href="/articulos"
+        class="text-primary-500 hover:text-primary-600 font-semibold uppercase text-sm"
+      >
+        Ver más artículos →
+      </a>
+    </div>
+  </SectionWrap>
+
+  <SectionWrap id="redes-sociales" backgroundColor="white" padding="xl">
+    <section class="py-12">
+      <h2
+        class="text-3xl md:text-4xl font-bold text-primary-500 mb-8 text-center font-serif"
+      >
+        Conoce un poco más de nosotros
+      </h2>
+
+      <div id="youtube-carousel-loading" class="text-center py-12">
+        <p class="text-lg text-charcoal-500">Cargando videos…</p>
+      </div>
+      <div id="youtube-carousel-empty" class="text-center py-12 hidden">
+        <p class="text-lg text-charcoal-500">
+          No hay videos disponibles en este momento.
+        </p>
+      </div>
+
+      <div
+        id="youtube-carousel-wrap"
+        class="relative hidden"
+        style="scrollbar-width: none; -ms-overflow-style: none;"
+      >
+        <div
+          id="youtube-carousel-track"
+          class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide pb-4"
+        ></div>
+
+        <button
+          id="youtube-carousel-prev"
+          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-10 transition-all opacity-70 hover:opacity-100"
+          aria-label="Anterior"
+        >
+          <svg
+            class="w-6 h-6 text-charcoal-700"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            ></path>
+          </svg>
+        </button>
+        <button
+          id="youtube-carousel-next"
+          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg z-10 transition-all opacity-70 hover:opacity-100"
+          aria-label="Siguiente"
+        >
+          <svg
+            class="w-6 h-6 text-charcoal-700"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="text-center mt-8">
+        <a
+          href={SITE_CONFIG.youtubeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 bg-[#ff0000] hover:bg-[#cc0000] text-white px-8 py-4 rounded-lg font-bold transition-colors shadow-lg"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+          <span>Ver en YouTube</span>
+        </a>
+      </div>
+    </section>
+  </SectionWrap>
+
+  <div
+    id="youtube-video-modal"
+    class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 p-4"
+  >
+    <div
+      id="youtube-modal-backdrop"
+      class="absolute inset-0"
+      aria-hidden="true"
+    ></div>
+    <div class="relative z-10 w-full max-w-4xl mx-4 aspect-video bg-black rounded-lg overflow-hidden">
+      <button
+        id="youtube-modal-close"
+        type="button"
+        class="absolute -top-12 right-0 text-white hover:text-gold-400 transition-colors"
+        aria-label="Cerrar"
+      >
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <iframe
+        id="youtube-video-iframe"
+        class="w-full h-full"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        title="Reproducir video"
+      ></iframe>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>

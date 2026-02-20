@@ -1,0 +1,72 @@
+---
+interface Props {
+  id?: string;
+  placeholder?: string;
+  value?: string;
+  class?: string;
+}
+
+const { id = 'insight-rich-text-editor', placeholder = 'Escribe aquí...', value = '', class: className = '' } = Astro.props;
+---
+
+<div class:list={['rich-text-editor-wrap', className]} data-editor-root>
+  <div
+    id={id}
+    data-placeholder={placeholder}
+    data-initial-value={value}
+    class="min-h-[200px] bg-white rounded-lg border border-beige-300 text-charcoal-700 prose prose-sm max-w-none"
+    aria-label="Editor de contenido"
+  ></div>
+</div>
+
+<script>
+  import Quill from 'quill';
+
+  const EDITOR_ID = 'insight-rich-text-editor';
+
+  function initEditor() {
+    const container = document.getElementById(EDITOR_ID);
+    if (!container || (window as any).__insightQuill) return;
+
+    const initial = container.getAttribute('data-initial-value') || '';
+    const placeholder = container.getAttribute('data-placeholder') || 'Escribe aquí...';
+
+    const quill = new Quill(container, {
+      theme: 'snow',
+      placeholder,
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ align: [] }],
+        ],
+      },
+    });
+
+    if (initial) {
+      quill.root.innerHTML = initial;
+    }
+
+    (window as any).__insightQuill = quill;
+  }
+
+  (window as any).initInsightEditor = function () {
+    if ((window as any).__insightQuill) return;
+    initEditor();
+  };
+
+  document.addEventListener('init-insight-editor', initEditor);
+
+  (window as any).getInsightEditorContent = function () {
+    const q = (window as any).__insightQuill;
+    return q ? (q.root.innerHTML || '') : '';
+  };
+  (window as any).setInsightEditorContent = function (html: string) {
+    const q = (window as any).__insightQuill;
+    if (q) q.root.innerHTML = html || '';
+  };
+  (window as any).clearInsightEditor = function () {
+    const q = (window as any).__insightQuill;
+    if (q) q.setText('');
+  };
+</script>

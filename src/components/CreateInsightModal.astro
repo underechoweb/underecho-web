@@ -1,0 +1,396 @@
+---
+import RichTextEditor from "@/components/RichTextEditor.astro";
+import { miembrosEquipo } from "@/data/equipo";
+
+interface Props {
+  listTargetId?: string;
+  defaultKind?: "noticia" | "articulo";
+  modalTitle?: string;
+}
+
+const {
+  listTargetId = "mock-noticias-list",
+  defaultKind = "noticia",
+  modalTitle = "Nueva noticia",
+} = Astro.props;
+---
+
+<div
+  id="create-insight-modal"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-charcoal-900/60 p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="create-insight-title"
+  data-list-target={listTargetId}
+  data-default-kind={defaultKind}
+  data-edit-pk=""
+  data-edit-type=""
+>
+  <div
+    class="modal-backdrop absolute inset-0 -z-10"
+    data-close-modal
+    aria-label="Cerrar"
+  >
+  </div>
+  <div
+    class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white shadow-xl"
+  >
+    <header
+      class="sticky top-0 z-10 relative flex items-center justify-center border-b border-beige-200 bg-white px-6 py-4"
+    >
+      <h2
+        id="create-insight-title"
+        class="text-xl font-bold text-charcoal-700 font-serif text-center"
+      >
+        {modalTitle}
+      </h2>
+      <button
+        type="button"
+        class="absolute right-4 top-1/2 -translate-y-1/2 rounded p-2 text-charcoal-500 hover:bg-beige-100 hover:text-charcoal-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        data-close-modal
+        aria-label="Cerrar modal"
+      >
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </header>
+
+    <form id="create-insight-form" class="p-6 space-y-4">
+      <input type="hidden" name="kind" value={defaultKind} />
+
+      <div>
+        <label
+          for="insight-title"
+          class="mb-1 block text-sm font-semibold text-charcoal-600"
+          >Título</label
+        >
+        <input
+          type="text"
+          id="insight-title"
+          name="title"
+          required
+          class="w-full rounded-lg border border-beige-300 px-3 py-2 text-charcoal-700 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+          placeholder="Título"
+        />
+      </div>
+
+      <div>
+        <label
+          for="insight-author"
+          class="mb-1 block text-sm font-semibold text-charcoal-600"
+          >Autor</label
+        >
+        <select
+          id="insight-author"
+          name="author"
+          required
+          class="w-full rounded-lg border border-beige-300 px-3 py-2 text-charcoal-700 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/30 bg-white"
+        >
+          <option value="">Seleccionar autor</option>
+          {miembrosEquipo.map((miembro) => (
+            <option value={miembro.name}>{miembro.name}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label
+          for="insight-image"
+          class="mb-1 block text-sm font-semibold text-charcoal-600"
+          >Imagen destacada</label
+        >
+        <p class="text-xs text-charcoal-500 mb-2">Subir archivo o pegar Key/URL (ej: underechoweb/mi-imagen.png o URL completa)</p>
+        <div class="flex gap-2 flex-wrap">
+          <input
+            type="file"
+            id="insight-image-file"
+            name="imageFile"
+            accept="image/*"
+            class="flex-1 min-w-0 text-sm text-charcoal-600 file:mr-2 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-beige-100 file:text-charcoal-700 hover:file:bg-beige-200"
+          />
+          <input
+            type="text"
+            id="insight-image"
+            name="image"
+            class="flex-1 min-w-[200px] rounded-lg border border-beige-300 px-3 py-2 text-sm text-charcoal-700 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+            placeholder="Key (underechoweb/archivo.png) o URL"
+          />
+        </div>
+        <p id="insight-image-status" class="mt-1 text-xs text-charcoal-500 hidden"></p>
+      </div>
+
+      <div>
+        <label class="mb-1 block text-sm font-semibold text-charcoal-600"
+          >Contenido</label
+        >
+        <RichTextEditor placeholder="Escribe el contenido aquí..." />
+      </div>
+
+      <div class="flex justify-end gap-3 pt-4 border-t border-beige-200">
+        <button
+          type="button"
+          class="btn-secondary text-sm py-2 px-4"
+          data-close-modal
+        >
+          Cancelar
+        </button>
+        <button type="submit" class="btn-primary text-sm py-2 px-4">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div
+  id="mock-insight-detail"
+  class="fixed inset-0 z-[60] hidden items-center justify-center bg-charcoal-900/60 p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="mock-insight-detail-title"
+>
+  <div
+    id="mock-insight-detail-backdrop"
+    class="absolute inset-0 -z-10"
+    aria-label="Cerrar"
+  >
+  </div>
+  <div
+    class="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white shadow-xl"
+  >
+    <header
+      class="sticky top-0 z-10 flex items-center justify-between border-b border-beige-200 bg-white px-6 py-4"
+    >
+      <h3
+        id="mock-insight-detail-title"
+        class="text-lg font-bold text-charcoal-700 font-serif"
+      >
+      </h3>
+      <button
+        type="button"
+        id="mock-insight-detail-close"
+        class="rounded p-2 text-charcoal-500 hover:bg-beige-100 hover:text-charcoal-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        aria-label="Cerrar"
+      >
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </header>
+    <div
+      id="mock-insight-detail-body"
+      class="prose prose-lg max-w-none prose-headings:text-charcoal-700 prose-p:text-charcoal-600 p-6"
+    >
+    </div>
+  </div>
+</div>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css"
+/>
+
+<script>
+  import { insightsService } from "@/services/insights.service";
+  import { supabaseStorage } from "@/services/supabaseStorage.service";
+
+  const MODAL_ID = "create-insight-modal";
+  const FORM_ID = "create-insight-form";
+
+  function getModal() {
+    return document.getElementById(MODAL_ID);
+  }
+
+  function resolveImageUrl(fileInput: HTMLInputElement | null, keyOrUrlInput: HTMLInputElement | null): string {
+    const file = fileInput?.files?.[0];
+    if (file) return "";
+
+    const value = (keyOrUrlInput?.value || "").trim();
+    if (!value) return "";
+
+    if (value.startsWith("http://") || value.startsWith("https://")) return value;
+    return supabaseStorage.getPublicImageUrl(value);
+  }
+
+  function openModal() {
+    const modal = getModal();
+    if (modal) {
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+      requestAnimationFrame(() => {
+        document.dispatchEvent(new CustomEvent("init-insight-editor"));
+      });
+    }
+  }
+
+  function closeModal() {
+    const modal = getModal();
+    if (modal) {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+    if (typeof (window as any).clearInsightEditor === "function") {
+      (window as any).clearInsightEditor();
+    }
+  }
+
+  function getEditorContent(): string {
+    return typeof (window as any).getInsightEditorContent === "function"
+      ? (window as any).getInsightEditorContent()
+      : "";
+  }
+
+  function setup() {
+    const form = document.getElementById(FORM_ID) as HTMLFormElement;
+
+    document
+      .querySelectorAll("[data-open-create-insight-modal]")
+      .forEach((el) => {
+        el.addEventListener("click", openModal);
+      });
+
+    getModal()
+      ?.querySelectorAll("[data-close-modal]")
+      .forEach((el) => {
+        el.addEventListener("click", closeModal);
+      });
+
+    window.addEventListener("open-edit-insight-modal", ((e: CustomEvent) => {
+      const { row, type } = e.detail as { row: { pk: number; title: string; content: string; image?: string; author?: string }; type: "news" | "article" };
+      const modal = getModal();
+      if (!modal) return;
+      modal.setAttribute("data-edit-pk", String(row.pk));
+      modal.setAttribute("data-edit-type", type);
+      const titleEl = document.getElementById("create-insight-title");
+      if (titleEl) titleEl.textContent = type === "news" ? "Editar noticia" : "Editar artículo";
+      const titleInput = form?.querySelector('input[name="title"]') as HTMLInputElement;
+      if (titleInput) {
+        titleInput.value = row.title || "";
+        titleInput.placeholder = type === "news" ? "Título de la noticia" : "Título del artículo";
+      }
+      const authorSelect = form?.querySelector('select[name="author"]') as HTMLSelectElement;
+      if (authorSelect) authorSelect.value = row.author || "";
+      const imageInput = document.getElementById("insight-image") as HTMLInputElement;
+      if (imageInput) imageInput.value = row.image || "";
+      const fileInput = document.getElementById("insight-image-file") as HTMLInputElement;
+      if (fileInput) fileInput.value = "";
+      if (typeof (window as any).setInsightEditorContent === "function") {
+        (window as any).setInsightEditorContent(row.content || "");
+      }
+      const kindInput = form?.querySelector('input[name="kind"]') as HTMLInputElement;
+      if (kindInput) kindInput.value = type === "news" ? "noticia" : "articulo";
+      openModal();
+    }) as EventListener);
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const modal = getModal();
+        const editPk = modal?.getAttribute("data-edit-pk");
+        const editType = modal?.getAttribute("data-edit-type") as "news" | "article" | null;
+        const defaultKind = (modal?.getAttribute("data-default-kind") || "noticia") as
+          | "noticia"
+          | "articulo";
+        const kind =
+          editPk && editType
+            ? (editType === "news" ? "noticia" : "articulo")
+            : defaultKind;
+        const formData = new FormData(form);
+        const title = (formData.get("title") as string)?.trim() || "";
+        const author = (formData.get("author") as string)?.trim() || "";
+        const content = getEditorContent() || "";
+        const fileInput = document.getElementById("insight-image-file") as HTMLInputElement;
+        const keyOrUrlInput = document.getElementById("insight-image") as HTMLInputElement;
+        const statusEl = document.getElementById("insight-image-status");
+
+        if (!title) return;
+
+        let imageUrl = "";
+        if (fileInput?.files?.[0]) {
+          try {
+            if (statusEl) {
+              statusEl.textContent = "Subiendo imagen...";
+              statusEl.classList.remove("hidden");
+            }
+            const key = await supabaseStorage.uploadImage(fileInput.files[0]);
+            imageUrl = supabaseStorage.getPublicImageUrl(key);
+            if (statusEl) statusEl.textContent = "";
+          } catch (err) {
+            if (statusEl) {
+              statusEl.textContent = err instanceof Error ? err.message : "Error al subir";
+              statusEl.classList.add("text-red-600");
+            }
+            return;
+          }
+        } else {
+          imageUrl = resolveImageUrl(fileInput, keyOrUrlInput);
+        }
+
+        const apiPayload =
+          kind === "noticia"
+            ? insightsService.buildNewsPayload(title, content, imageUrl, author)
+            : insightsService.buildArticlePayload(title, content, imageUrl, author);
+
+        if (editPk && editType) {
+          window.dispatchEvent(
+            new CustomEvent("insight-edit-submit", {
+              detail: { kind, pk: parseInt(editPk, 10), apiPayload },
+            }),
+          );
+          modal?.setAttribute("data-edit-pk", "");
+          modal?.setAttribute("data-edit-type", "");
+        } else {
+          window.dispatchEvent(
+            new CustomEvent("insight-create-submit", {
+              detail: { kind, apiPayload },
+            }),
+          );
+        }
+
+        closeModal();
+        form.reset();
+        if (statusEl) statusEl.classList.add("hidden");
+      });
+    }
+
+    const detailClose = document.getElementById("mock-insight-detail-close");
+    const detailOverlay = document.getElementById(
+      "mock-insight-detail-backdrop",
+    );
+    const detailEl = document.getElementById("mock-insight-detail");
+    [detailClose, detailOverlay].forEach((el) => {
+      el?.addEventListener("click", () => {
+        detailEl?.classList.add("hidden");
+        detailEl?.classList.remove("flex");
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", setup);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setup);
+  } else {
+    setup();
+  }
+</script>

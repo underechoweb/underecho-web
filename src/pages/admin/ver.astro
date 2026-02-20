@@ -1,0 +1,128 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Ver contenido - Admin UnDerecho"
+  description="Vista previa del contenido."
+>
+  <main class="min-h-screen bg-beige-100 py-12">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div
+        id="admin-ver-root"
+        class="bg-white rounded-xl shadow-lg border border-beige-200 overflow-hidden"
+      >
+        <p class="p-8 text-charcoal-500">Cargando…</p>
+      </div>
+      <p id="admin-ver-error" class="mt-4 text-red-600 text-sm hidden"></p>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  import { supabaseAuth } from "@/services/supabaseAuth.service";
+  import { supabaseApi } from "@/services/supabaseApi.service";
+
+  function escapeHtml(s: string): string {
+    const div = document.createElement("div");
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function formatDate(ts: string): string {
+    try {
+      return new Date(ts).toLocaleDateString("es-CO", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    } catch {
+      return ts;
+    }
+  }
+
+  async function loadContent() {
+    const root = document.getElementById("admin-ver-root");
+    const errEl = document.getElementById("admin-ver-error");
+    if (!root) return;
+
+    if (!supabaseAuth.isAuthenticated()) {
+      window.location.href = "/admin";
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    const pkStr = params.get("pk");
+    const pk = pkStr ? parseInt(pkStr, 10) : NaN;
+
+    if ((type !== "news" && type !== "article") || !Number.isFinite(pk)) {
+      root.innerHTML =
+        '<p class="p-8 text-charcoal-500">Parámetros no válidos. <a href="/admin" class="text-primary-600 hover:underline">Volver al panel</a>.</p>';
+      return;
+    }
+
+    try {
+      const row =
+        type === "news"
+          ? await supabaseApi.getNewsByPk(pk)
+          : await supabaseApi.getArticleByPk(pk);
+      if (!row) {
+        root.innerHTML =
+          '<p class="p-8 text-charcoal-500">No encontrado. <a href="/admin" class="text-primary-600 hover:underline">Volver al panel</a>.</p>';
+        return;
+      }
+
+      const tagLabel = type === "news" ? "Noticias" : "Artículos";
+      const author = "Equipo UnDerecho";
+      const dateStr = formatDate(row.created_at);
+      const tags =
+        type === "news"
+          ? ["Noticias", "Tutela", "Estadísticas"]
+          : ["Artículos", "Guías", "Derecho"];
+
+      root.innerHTML = `
+        <article class="max-w-4xl">
+          <header class="px-6 md:px-8 pt-8 pb-6 border-b border-beige-200">
+            <a href="/admin" class="inline-block text-primary-600 hover:text-primary-700 text-sm font-semibold mb-6">← Volver al panel</a>
+            <h1 class="text-4xl md:text-5xl font-bold text-charcoal-700 font-serif mb-4 break-words">${escapeHtml(row.title)}</h1>
+            <div class="flex flex-wrap gap-4 text-charcoal-500 text-sm">
+              <time datetime="${escapeHtml(row.created_at)}">${escapeHtml(dateStr)}</time>
+              <span>Por ${escapeHtml(author)}</span>
+              <span class="inline-block bg-gold-100 text-gold-700 text-xs font-semibold px-3 py-1 rounded-full">${escapeHtml(tagLabel)}</span>
+            </div>
+            <div class="flex flex-wrap gap-2 mt-4">
+              ${tags.map((t) => `<span class="bg-beige-200 text-charcoal-600 text-xs font-medium px-3 py-1 rounded-full">${escapeHtml(t)}</span>`).join("")}
+            </div>
+          </header>
+          <div class="prose prose-lg max-w-none prose-headings:text-charcoal-700 prose-p:text-charcoal-600 prose-a:text-primary-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-charcoal-700 prose-ul:text-charcoal-600 prose-ol:text-charcoal-600 prose-li:text-charcoal-600 px-6 md:px-8 py-8" id="admin-ver-content"></div>
+          <footer class="px-6 md:px-8 pb-8 pt-6 border-t border-beige-200">
+            <a href="/admin" class="inline-block text-primary-600 hover:text-primary-700 font-semibold">← Volver al panel</a>
+          </footer>
+        </article>
+      `;
+
+      const contentEl = document.getElementById("admin-ver-content");
+      if (contentEl) contentEl.innerHTML = row.content ?? "";
+
+      if (errEl) {
+        errEl.classList.add("hidden");
+        errEl.textContent = "";
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Error al cargar";
+      root.innerHTML = `<p class="p-8 text-red-600">${escapeHtml(msg)}. <a href="/admin" class="text-primary-600 hover:underline">Volver al panel</a>.</p>`;
+      if (errEl) {
+        errEl.textContent = msg;
+        errEl.classList.remove("hidden");
+      }
+    }
+  }
+
+  document.addEventListener("astro:page-load", loadContent);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadContent);
+  } else {
+    loadContent();
+  }
+</script>

@@ -1,0 +1,114 @@
+---
+import PlainLayout from '@/layouts/PlainLayout.astro';
+import { miembrosEquipo } from '@/data/equipo';
+import { SITE_CONFIG } from '@/config/site';
+
+const title = 'Equipo - UnDerecho';
+const description = 'Conoce al equipo de UnDerecho, profesionales comprometidos con hacer la justicia accesible.';
+---
+
+<PlainLayout title={title} description={description} fullWidth={true}>
+  <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Nuestro Equipo
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Conoce a las personas detrás de UnDerecho
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-12">
+      {miembrosEquipo.map((miembro) => (
+        <article class="flex flex-col">
+          <div class="relative mb-2">
+            <span class="absolute top-2 right-2 bg-white text-gray-600 text-xs font-semibold px-2 py-1 rounded z-10">
+              COLOMBIA
+            </span>
+          </div>
+
+          <!-- Deshabilitado: link al detalle (cambiarz div por a para reactivar) -->
+          <div
+            class="w-full aspect-square mb-4 relative group block"
+          >
+            <img
+              src={miembro.foto}
+              alt={miembro.name}
+              class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="flex-1 flex flex-col">
+            <a
+              href={`/equipo/${miembro.slug}`}
+              class="mb-2 group block"
+            >
+              <h2 class="text-xl md:text-2xl font-bold text-primary-700 group-hover:text-primary-800 transition-colors">
+                {miembro.name}
+              </h2>
+            </a>
+
+            <p class="text-gray-600 text-sm md:text-base mb-3">
+              {miembro.cargo}
+            </p>
+
+            <hr class="border-gray-300 mb-3" />
+
+            <p class="text-gray-500 text-sm mb-4 line-clamp-2">
+              {miembro.area}
+            </p>
+
+            <div class="space-y-2 mt-auto">
+              <div class="flex items-center text-gray-500 text-sm">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <a href={`tel:${miembro.telefono.replace(/\s/g, '')}`} class="hover:text-primary-700 transition-colors">
+                  {miembro.telefono}
+                </a>
+              </div>
+              <div class="flex items-center text-gray-500 text-sm">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <a href={`mailto:${miembro.email}`} class="hover:text-primary-700 transition-colors break-all">
+                  {miembro.email}
+                </a>
+              </div>
+            </div>
+
+            <!-- Oculto: botón para ir al detalle (se puede reactivar quitando 'hidden') -->
+            <a
+              href={`/equipo/${miembro.slug}`}
+              class="hidden mt-4 w-10 h-10 rounded-full border-2 border-gray-300 hover:border-primary-700 hover:bg-primary-50 flex items-center justify-center transition-all group self-end"
+              aria-label={`Ver experiencia de ${miembro.name}`}
+            >
+              <svg class="w-5 h-5 text-gray-600 group-hover:text-primary-700 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <section class="bg-beige-100 rounded-lg p-8 text-center mt-12 border border-beige-300">
+      <h2 class="text-2xl font-bold text-charcoal-700 mb-4">
+        ¿Quieres formar parte del equipo?
+      </h2>
+      <p class="text-lg text-charcoal-600 mb-6">
+        Estamos siempre buscando personas comprometidas con hacer la justicia accesible
+      </p>
+      <a href={SITE_CONFIG.whatsappUrlConsulta} target="_blank" rel="noopener noreferrer" class="btn-primary">
+        Contáctanos
+      </a>
+    </section>
+  </div>
+</PlainLayout>
+
+<style>
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+</style>

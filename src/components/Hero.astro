@@ -1,0 +1,125 @@
+---
+import type { HeroProps } from '@/types';
+import { slidesCiudades } from '@/data/carrusel-ciudades';
+
+interface Props extends HeroProps {
+  /** Si no se pasa image, se usa el carrusel de ciudades */
+}
+
+const {
+  title,
+  subtitle,
+  ctaText = 'Agende su consulta',
+  ctaHref = '/contacto',
+  image,
+  imageAlt,
+} = Astro.props;
+
+const useCarousel = !image;
+---
+
+<section class="relative min-h-[600px] md:min-h-[700px] lg:min-h-[800px] overflow-hidden" aria-labelledby="hero-title">
+  {useCarousel ? (
+    <!-- Carrusel automático de ciudades -->
+    <div class="absolute inset-0 hero-carousel" id="hero-carousel">
+      {slidesCiudades.map((slide, i) => (
+        <div
+          class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-700 ease-in-out"
+          data-slide-index={i}
+          aria-hidden={i !== 0}
+        >
+          <img
+            src={slide.src}
+            alt={slide.alt}
+            class="w-full h-full object-cover object-center"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : undefined}
+          />
+          <div 
+            class="absolute inset-0"
+            style="background: linear-gradient(to right, rgba(197, 165, 91, 0.75) 0%, rgba(197, 165, 91, 0.55) 20%, rgba(197, 165, 91, 0.35) 35%, rgba(197, 165, 91, 0.15) 50%, transparent 65%);"
+          ></div>
+          <div class="absolute bottom-6 right-6 md:bottom-8 md:right-8 lg:bottom-10 lg:right-12">
+            <span class="text-xl md:text-2xl lg:text-3xl font-bold text-white drop-shadow-lg font-serif uppercase tracking-wide">
+              {slide.city}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="absolute inset-0">
+      <img
+        src={image}
+        alt={imageAlt || title}
+        class="w-full h-full object-cover object-center"
+        loading="eager"
+      />
+      <div 
+        class="absolute inset-0"
+        style="background: linear-gradient(to right, rgba(197, 165, 91, 0.75) 0%, rgba(197, 165, 91, 0.55) 20%, rgba(197, 165, 91, 0.35) 35%, rgba(197, 165, 91, 0.15) 50%, transparent 65%);"
+      ></div>
+    </div>
+  )}
+  
+  <div 
+    class="absolute inset-0"
+    style="background: linear-gradient(to right, rgba(197, 165, 91, 0.85) 0%, rgba(197, 165, 91, 0.72) 18%, rgba(197, 165, 91, 0.50) 32%, rgba(197, 165, 91, 0.25) 45%, transparent 55%);"
+  ></div>
+  
+  <div class="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 h-full min-h-[600px] md:min-h-[700px] lg:min-h-[800px] flex items-center">
+    <div class="w-full md:w-[42%] lg:w-[40%] py-20 md:py-32">
+      <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 uppercase tracking-tight leading-[1.1] font-serif">
+        {title}
+      </h1>
+      {subtitle && (
+        <p class="text-xl md:text-2xl text-white mb-10 leading-relaxed font-sans">
+          {subtitle}
+        </p>
+      )}
+      {ctaText && (
+        <a
+          href={ctaHref}
+          class="btn-primary inline-block"
+          {...(ctaHref.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          {ctaText}
+        </a>
+      )}
+    </div>
+  </div>
+  
+</section>
+
+{useCarousel && (
+  <script>
+    (function initHeroCarousel() {
+      const container = document.getElementById('hero-carousel');
+      if (!container) return;
+
+      const slides = container.querySelectorAll('.hero-slide');
+      if (slides.length === 0) return;
+
+      let currentIndex = 0;
+      const INTERVAL_MS = 5500;
+
+      function showSlide(index: number): void {
+        const next = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+          const el = slide as HTMLElement;
+          const isActive = i === next;
+          el.classList.toggle('opacity-0', !isActive);
+          el.classList.toggle('opacity-100', isActive);
+          el.setAttribute('aria-hidden', String(!isActive));
+        });
+        currentIndex = next;
+      }
+
+      showSlide(0);
+
+      setInterval(() => {
+        showSlide(currentIndex + 1);
+      }, INTERVAL_MS);
+    })();
+  </script>
+)}

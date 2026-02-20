@@ -1,0 +1,168 @@
+---
+import PlainLayout from "@/layouts/PlainLayout.astro";
+import SectionWrap from "@/components/SectionWrap.astro";
+import nosotrosImg from "@/assets/nosotros/nosotros.webp";
+import nuestraFilosofiaImg from "@/assets/nosotros/nuestra-filosofia.webp";
+import nuestrosValoresImg from "@/assets/nosotros/nuestros-valores.webp";
+import cumplimientoImg from "@/assets/nosotros/cumplimiento.webp";
+
+const title = "Nosotros - UnDerecho";
+const description =
+  "Conoce más sobre UnDerecho, una firma de abogados con sólida formación y experiencia, orientados al ejercicio responsable y estratégico del derecho.";
+
+const valores = [
+  "Accesibilidad",
+  "Lealtad",
+  "Transparencia",
+  "Diligencia",
+  "Ética",
+  "Compromiso y Responsabilidad",
+];
+---
+
+<PlainLayout title={title} description={description} fullWidth={true}>
+  <div class="w-full">
+    <SectionWrap backgroundColor="white" padding="xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch min-h-0">
+        <div
+          class="order-2 lg:order-1 bg-beige-50 p-8 md:p-12 lg:p-16 flex flex-col justify-center min-h-[320px] lg:min-h-[400px]"
+        >
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal-700 mb-6 font-serif"
+          >
+            Nosotros
+          </h2>
+          <div class="w-16 h-1 bg-gold-500 mb-6"></div>
+          <p class="text-charcoal-600 text-lg md:text-xl leading-relaxed text-justify">
+            Un Derecho es una firma de abogados conformada por un equipo de
+            profesionales con sólida formación y experiencia, orientados al
+            ejercicio responsable y estratégico del derecho. Nuestro trabajo se
+            fundamenta en el rigor técnico, la ética profesional y un enfoque
+            práctico que prioriza soluciones bien pensadas y jurídicamente
+            consistentes, siempre con un trato cercano y respetuoso hacia
+            quienes confían en nosotros.
+          </p>
+        </div>
+        <div
+          class="order-1 lg:order-2 relative min-h-[280px] lg:min-h-[400px] overflow-hidden"
+        >
+          <img
+            src={nosotrosImg.src}
+            alt="Equipo de UnDerecho"
+            class="absolute inset-0 w-full h-full object-cover shadow-lg"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </SectionWrap>
+
+    <SectionWrap backgroundColor="white" padding="xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch min-h-0">
+        <div class="order-1 relative min-h-[280px] lg:min-h-[400px] overflow-hidden">
+          <img
+            src={nuestraFilosofiaImg.src}
+            alt="Nuestra filosofía"
+            class="absolute inset-0 w-full h-full object-cover shadow-lg"
+            loading="lazy"
+          />
+        </div>
+        <div
+          class="order-2 bg-beige-50 p-8 md:p-12 lg:p-16 flex flex-col justify-center min-h-[320px] lg:min-h-[400px]"
+        >
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal-700 mb-6 font-serif"
+          >
+            Nuestra filosofía
+          </h2>
+          <div class="w-16 h-1 bg-gold-500 mb-6"></div>
+          <p
+            class="text-xl md:text-2xl text-charcoal-700 leading-relaxed font-semibold italic mb-6 text-justify"
+          >
+            No hay un derecho para unos y otro para otros: hay Un Derecho.
+          </p>
+          <p class="text-charcoal-600 text-lg md:text-xl leading-relaxed text-justify">
+            Un Derecho parte de una idea esencial: no hay derecho para unos y
+            otro para otros no; el derecho es uno solo y debe ejercerse con el
+            mismo rigor, respeto y responsabilidad para todos. Creemos en un
+            ejercicio jurídico sin privilegios, basado en la ética, la
+            coherencia y la correcta aplicación de la ley, donde cada caso se
+            aborda con seriedad, criterio profesional y compromiso real,
+            entendiendo que el derecho solo cumple su función cuando se aplica
+            con justicia y sin distinciones. Todo, mientras trabajamos para que
+            tus derechos se traduzcan en una oportunidad real de acceder a la
+            justicia.
+          </p>
+        </div>
+      </div>
+    </SectionWrap>
+
+    <SectionWrap backgroundColor="white" padding="xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch min-h-0">
+        <div
+          class="order-2 lg:order-1 bg-beige-50 p-8 md:p-12 lg:p-16 flex flex-col justify-center min-h-[320px] lg:min-h-[400px]"
+        >
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal-700 mb-6 font-serif"
+          >
+            Nuestros valores
+          </h2>
+          <div class="w-16 h-1 bg-gold-500 mb-6"></div>
+          <ul class="space-y-4 text-charcoal-600 text-lg md:text-xl text-justify">
+            {
+              valores.map((valor) => (
+                <li class="flex items-start group">
+                  <span class="text-gold-500 mr-4 font-bold text-xl mt-0.5 group-hover:text-gold-600 transition-colors">
+                    •
+                  </span>
+                  <span class="leading-relaxed">{valor}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div
+          class="order-1 lg:order-2 relative min-h-[280px] lg:min-h-[400px] overflow-hidden"
+        >
+          <img
+            src={nuestrosValoresImg.src}
+            alt="Nuestros valores"
+            class="absolute inset-0 w-full h-full object-cover shadow-lg"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </SectionWrap>
+
+
+    <SectionWrap backgroundColor="white" padding="xl">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch min-h-0">
+        <div class="order-1 relative min-h-[280px] lg:min-h-[400px] overflow-hidden">
+          <img
+            src={cumplimientoImg.src}
+            alt="Cumplimiento"
+            class="absolute inset-0 w-full h-full object-cover shadow-lg"
+            loading="lazy"
+          />
+        </div>
+        <div
+          class="order-2 bg-beige-50 p-8 md:p-12 lg:p-16 flex flex-col justify-center min-h-[320px] lg:min-h-[400px]"
+        >
+          <h2
+            class="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal-700 mb-6 font-serif"
+          >
+            Cumplimiento
+          </h2>
+          <div class="w-16 h-1 bg-gold-500 mb-6"></div>
+          <p class="text-charcoal-600 text-lg md:text-xl leading-relaxed text-justify">
+            Mantenemos un firme compromiso respecto al cumplimiento de la ley y
+            de los principios éticos que rigen el ejercicio profesional.
+            Prevenimos conflictos de interés, garantizamos la confidencialidad
+            de la información y adoptamos prácticas responsables que aseguran
+            transparencia, legalidad y confianza en cada una de nuestras
+            actuaciones.
+          </p>
+        </div>
+      </div>
+    </SectionWrap>
+  </div>
+</PlainLayout>

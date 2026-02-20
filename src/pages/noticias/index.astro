@@ -1,0 +1,43 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionWrap from "@/components/SectionWrap.astro";
+
+const title = "Noticias - UnDerecho";
+const description =
+  "Noticias y actualizaciones sobre legislación, regulaciones y cambios en el ámbito legal que te afectan.";
+---
+<script>
+  import { loadNoticiasList } from "@/scripts/insightsFetch";
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadNoticiasList);
+  } else {
+    loadNoticiasList();
+  }
+</script>
+
+<BaseLayout title={title} description={description}>
+  <SectionWrap backgroundColor="white" padding="xl">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Noticias Legales
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Mantente informado sobre los cambios y actualizaciones en el ámbito
+        legal
+      </p>
+    </header>
+
+    <div id="noticias-list-loading" class="text-center py-12">
+      <p class="text-lg text-gray-600">Cargando noticias…</p>
+    </div>
+    <div id="noticias-list-empty" class="text-center py-12 hidden">
+      <p class="text-lg text-gray-600">
+        No hay noticias disponibles en este momento.
+      </p>
+    </div>
+    <div
+      id="noticias-list-grid"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"
+    ></div>
+  </SectionWrap>
+</BaseLayout>
