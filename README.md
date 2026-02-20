@@ -105,6 +105,10 @@ Edita `src/config/site.ts` para cambiar:
 
 ---
 
+## Despliegue
+
+El proyecto está preparado para desplegarse en [Vercel](https://vercel.com). Conecta el repositorio y configura las variables de entorno en el dashboard.
+
 ## Recursos
 
 - [Astro](https://docs.astro.build)
