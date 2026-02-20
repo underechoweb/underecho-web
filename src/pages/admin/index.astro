@@ -1,0 +1,665 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CreateInsightModal from "@/components/CreateInsightModal.astro";
+---
+
+<BaseLayout
+  title="Panel editor - UnDerecho"
+  description="Acceso restringido a editores."
+>
+  <main class="min-h-screen bg-beige-100 py-12">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <div id="admin-login-view" class="hidden">
+        <section
+          class="bg-white rounded-xl shadow-lg border border-beige-200 p-8 max-w-md mx-auto"
+        >
+          <h1 class="text-2xl font-bold text-charcoal-700 font-serif mb-2">
+            Panel de edición
+          </h1>
+          <p class="text-charcoal-500 text-sm mb-6">
+            Ingresa tus credenciales para gestionar noticias y artículos.
+          </p>
+          <form id="admin-login-form" class="space-y-4">
+            <div>
+              <label
+                for="admin-email"
+                class="block text-sm font-semibold text-charcoal-600 mb-1"
+                >Correo</label
+              >
+              <input
+                type="email"
+                id="admin-email"
+                name="email"
+                required
+                autocomplete="email"
+                class="w-full rounded-lg border border-beige-300 px-3 py-2 text-charcoal-700 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+                placeholder="correo@ejemplo.com"
+              />
+            </div>
+            <div>
+              <label
+                for="admin-password"
+                class="block text-sm font-semibold text-charcoal-600 mb-1"
+                >Contraseña</label
+              >
+              <input
+                type="password"
+                id="admin-password"
+                name="password"
+                required
+                autocomplete="current-password"
+                class="w-full rounded-lg border border-beige-300 px-3 py-2 text-charcoal-700 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+              />
+            </div>
+            <p id="admin-login-error" class="text-red-600 text-sm hidden"></p>
+            <button type="submit" class="btn-primary w-full">Entrar</button>
+          </form>
+        </section>
+      </div>
+
+      <div id="admin-panel-view" class="hidden">
+        <header class="mb-10 pb-6 border-b border-beige-200">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h1
+                class="text-2xl md:text-3xl font-bold text-charcoal-700 font-serif"
+              >
+                Panel de administración
+              </h1>
+              <p id="admin-user-email" class="text-sm text-charcoal-500 mt-1">
+              </p>
+            </div>
+            <div class="flex items-center gap-3">
+              <a
+                href="/insights"
+                class="text-primary-600 hover:text-primary-700 text-sm font-semibold"
+                >Ver en el sitio →</a
+              >
+              <button
+                type="button"
+                id="admin-logout"
+                class="btn-secondary text-sm py-2 px-4">Cerrar sesión</button
+              >
+            </div>
+          </div>
+        </header>
+
+        <div class="mb-10">
+          <h2
+            class="text-sm font-semibold text-charcoal-500 uppercase tracking-wider mb-3"
+          >
+            Acciones rápidas
+          </h2>
+          <div class="flex flex-wrap gap-3">
+            <button
+              type="button"
+              data-open-create="noticia"
+              class="btn-primary text-sm py-2 px-4"
+            >
+              + Crear noticia
+            </button>
+            <button
+              type="button"
+              data-open-create="articulo"
+              class="btn-primary text-sm py-2 px-4"
+            >
+              + Crear artículo
+            </button>
+          </div>
+        </div>
+
+        <section class="space-y-12">
+          <div>
+            <div class="flex flex-wrap items-baseline justify-between gap-4 mb-4">
+              <div class="flex items-center gap-3">
+                <h2 class="text-lg font-bold text-charcoal-700 font-serif">
+                  Noticias
+                </h2>
+                <span class="text-xs text-charcoal-400"
+                  >Aparecen en la sección Insights</span
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <label for="admin-news-filter" class="text-sm text-charcoal-600">Filtrar por título:</label>
+                <input
+                  type="text"
+                  id="admin-news-filter"
+                  placeholder="Buscar por título..."
+                  class="w-48 rounded-lg border border-beige-300 px-2 py-1.5 text-sm text-charcoal-700 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+                />
+              </div>
+            </div>
+            <div
+              id="admin-news-list"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              <p class="text-charcoal-500 text-sm col-span-full">Cargando…</p>
+            </div>
+          </div>
+          <div>
+            <div class="flex flex-wrap items-baseline justify-between gap-4 mb-4">
+              <div class="flex items-center gap-3">
+                <h2 class="text-lg font-bold text-charcoal-700 font-serif">
+                  Artículos
+                </h2>
+                <span class="text-xs text-charcoal-400"
+                  >Aparecen en la sección Insights</span
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <label for="admin-article-filter" class="text-sm text-charcoal-600">Filtrar por título:</label>
+                <input
+                  type="text"
+                  id="admin-article-filter"
+                  placeholder="Buscar por título..."
+                  class="w-48 rounded-lg border border-beige-300 px-2 py-1.5 text-sm text-charcoal-700 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/30"
+                />
+              </div>
+            </div>
+            <div
+              id="admin-article-list"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              <p class="text-charcoal-500 text-sm col-span-full">Cargando…</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <CreateInsightModal
+    listTargetId="admin-news-list"
+    defaultKind="noticia"
+    modalTitle="Nueva noticia"
+  />
+
+  <div
+    id="admin-delete-modal"
+    class="fixed inset-0 z-[60] hidden items-center justify-center bg-charcoal-900/60 p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="admin-delete-modal-title"
+  >
+    <div class="absolute inset-0 -z-10" data-close-delete-modal aria-label="Cerrar"></div>
+    <div class="relative w-full max-w-md rounded-lg bg-white shadow-xl p-6">
+      <h3 id="admin-delete-modal-title" class="text-xl font-bold text-charcoal-700 font-serif mb-2">
+        Eliminar
+      </h3>
+      <p id="admin-delete-modal-message" class="text-charcoal-600 mb-6">
+      </p>
+      <div class="flex justify-end gap-3">
+        <button type="button" class="btn-secondary text-sm py-2 px-4" data-close-delete-modal>
+          Cancelar
+        </button>
+        <button type="button" id="admin-delete-confirm" class="text-sm py-2 px-4 rounded-lg font-semibold bg-red-600 hover:bg-red-700 text-white transition-colors">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="admin-toast"
+    class="fixed bottom-4 right-4 z-[70] max-w-md p-4 rounded-lg shadow-lg border border-red-200 bg-red-50 hidden"
+    role="alert"
+    aria-live="assertive"
+  >
+    <div class="flex items-start gap-3">
+      <span id="admin-toast-message" class="flex-1 text-sm text-charcoal-700"></span>
+      <button type="button" id="admin-toast-close" class="text-charcoal-500 hover:text-charcoal-700" aria-label="Cerrar">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { supabaseAuth } from "@/services/supabaseAuth.service";
+  import { supabaseApi } from "@/services/supabaseApi.service";
+
+  const LOGIN_VIEW = "admin-login-view";
+  const PANEL_VIEW = "admin-panel-view";
+  const MODAL_ID = "create-insight-modal";
+  const DELETE_MODAL_ID = "admin-delete-modal";
+
+  let cachedNews: { pk: number; created_at: string; title: string; content: string; author?: string }[] = [];
+  let cachedArticles: { pk: number; created_at: string; title: string; content: string; author?: string }[] = [];
+  let pendingDelete: { pk: number; type: "news" | "article"; title: string } | null = null;
+
+  function showToast(message: string, isError = true) {
+    const toast = document.getElementById("admin-toast");
+    const msgEl = document.getElementById("admin-toast-message");
+    if (!toast || !msgEl) return;
+    msgEl.textContent = message;
+    toast.classList.remove("hidden");
+    toast.classList.add("flex");
+    toast.classList.remove("bg-green-100", "border-green-300");
+    toast.classList.add("bg-red-50", "border-red-200");
+    setTimeout(() => {
+      toast.classList.add("hidden");
+      toast.classList.remove("flex");
+    }, 5000);
+  }
+
+  function closeToast() {
+    const toast = document.getElementById("admin-toast");
+    if (toast) {
+      toast.classList.add("hidden");
+      toast.classList.remove("flex");
+    }
+  }
+
+  function openDeleteModal(pk: number, type: "news" | "article", title: string) {
+    pendingDelete = { pk, type, title };
+    const modal = document.getElementById(DELETE_MODAL_ID);
+    const titleEl = document.getElementById("admin-delete-modal-title");
+    const msgEl = document.getElementById("admin-delete-modal-message");
+    if (modal && titleEl && msgEl) {
+      titleEl.textContent = type === "news" ? "Eliminar noticia" : "Eliminar artículo";
+      msgEl.textContent = `¿Está seguro de que desea eliminar "${title}"? Esta acción no se puede deshacer.`;
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeDeleteModal() {
+    pendingDelete = null;
+    const modal = document.getElementById(DELETE_MODAL_ID);
+    if (modal) {
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+  }
+
+  function showLogin() {
+    document.getElementById(LOGIN_VIEW)?.classList.remove("hidden");
+    document.getElementById(PANEL_VIEW)?.classList.add("hidden");
+  }
+
+  function showPanel() {
+    document.getElementById(LOGIN_VIEW)?.classList.add("hidden");
+    document.getElementById(PANEL_VIEW)?.classList.remove("hidden");
+    const emailEl = document.getElementById("admin-user-email");
+    if (emailEl)
+      emailEl.textContent = `Sesión: ${supabaseAuth.getCurrentUserEmail() ?? "editor"}`;
+    loadLists();
+  }
+
+  function escapeHtml(s: string): string {
+    const div = document.createElement("div");
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function formatDate(ts: string): string {
+    try {
+      return new Date(ts).toLocaleDateString("es-CO", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    } catch {
+      return ts;
+    }
+  }
+
+  function stripHtml(html: string): string {
+    const text = (html || "")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    return text.slice(0, 140);
+  }
+
+  function cardHtml(
+    row: { pk: number; created_at: string; title: string; content: string; image?: string; author?: string },
+    type: "news" | "article",
+  ) {
+    const tag = type === "news" ? "Noticias" : "Artículos";
+    const href = `/admin/ver?type=${type}&pk=${row.pk}`;
+    const desc = stripHtml(row.content || "") || row.title;
+    const dateStr = formatDate(row.created_at);
+    const author = row.author || "Equipo UnDerecho";
+    return `
+    <article class="bg-beige-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col border border-beige-200 hover:border-gold-300">
+      <a href="${escapeHtml(href)}" class="block flex flex-col focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 rounded-t-lg">
+        <div class="w-full h-48 bg-beige-100 rounded-t-lg overflow-hidden flex items-center justify-center">
+          ${row.image
+            ? `<img src="${escapeHtml(row.image)}" alt="${escapeHtml(row.title)}" class="w-full h-full object-cover" loading="lazy" />`
+            : `<span class="text-beige-400 text-4xl" aria-hidden="true">${type === "news" ? "📰" : "📄"}</span>`}
+        </div>
+        <div class="p-6 flex-grow flex flex-col">
+          <span class="inline-block bg-gold-100 text-gold-700 text-xs font-semibold px-3 py-1 rounded-full mb-3 self-start">${escapeHtml(tag)}</span>
+          <h3 class="text-xl font-bold text-charcoal-700 mb-3 font-serif break-words">${escapeHtml(row.title)}</h3>
+          <p class="text-charcoal-600 mb-4 line-clamp-3 flex-grow">${escapeHtml(desc)}</p>
+          <div class="flex flex-wrap gap-2 text-sm text-charcoal-400 mb-4">
+            <time datetime="${escapeHtml(row.created_at)}">${escapeHtml(dateStr)}</time>
+            <span>• ${escapeHtml(author)}</span>
+          </div>
+          <span class="inline-block text-gold-600 font-semibold hover:text-gold-700 transition-colors mt-auto">Leer más →</span>
+        </div>
+      </a>
+      <div class="px-4 py-3 border-t border-beige-200 flex gap-2" data-card-actions>
+        <button type="button" class="admin-btn-edit text-sm py-2 px-3 rounded-lg border border-beige-300 hover:bg-beige-100 text-charcoal-600 transition-colors" data-edit-pk="${row.pk}" data-edit-type="${type}" title="Editar">Editar</button>
+        <button type="button" class="admin-btn-delete text-sm py-2 px-3 rounded-lg border border-red-200 hover:bg-red-50 text-red-600 transition-colors" data-delete-pk="${row.pk}" data-delete-type="${type}" data-delete-title="${escapeHtml(row.title)}" title="Eliminar">Eliminar</button>
+      </div>
+    </article>`;
+  }
+
+  function renderNewsList(news: typeof cachedNews, newsFilter: string) {
+    const newsEl = document.getElementById("admin-news-list");
+    if (!newsEl) return;
+    if (news.length === 0) {
+      const msg = newsFilter.trim()
+        ? "Ningún resultado para el filtro."
+        : "No hay noticias.";
+      newsEl.innerHTML = `<p class="text-charcoal-500 text-sm col-span-full">${msg}</p>`;
+    } else {
+      newsEl.innerHTML = news.map((row) => cardHtml(row, "news")).join("");
+    }
+  }
+
+  function renderArticleList(articles: typeof cachedArticles, articleFilter: string) {
+    const articleEl = document.getElementById("admin-article-list");
+    if (!articleEl) return;
+    if (articles.length === 0) {
+      const msg = articleFilter.trim()
+        ? "Ningún resultado para el filtro."
+        : "No hay artículos.";
+      articleEl.innerHTML = `<p class="text-charcoal-500 text-sm col-span-full">${msg}</p>`;
+    } else {
+      articleEl.innerHTML = articles.map((row) => cardHtml(row, "article")).join("");
+    }
+  }
+
+  async function loadNewsOnly() {
+    const newsEl = document.getElementById("admin-news-list");
+    const newsFilter = (document.getElementById("admin-news-filter") as HTMLInputElement)?.value || "";
+    if (newsEl) newsEl.innerHTML = '<p class="text-charcoal-500 text-sm col-span-full">Cargando…</p>';
+    try {
+      const news = await supabaseApi.getNewsByTitleFilter(newsFilter);
+      cachedNews = news;
+      renderNewsList(news, newsFilter);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Error al cargar";
+      showToast(msg);
+      if (newsEl) newsEl.innerHTML = `<p class="text-red-600 text-sm col-span-full">${escapeHtml(msg)}</p>`;
+    }
+  }
+
+  async function loadArticlesOnly() {
+    const articleEl = document.getElementById("admin-article-list");
+    const articleFilter = (document.getElementById("admin-article-filter") as HTMLInputElement)?.value || "";
+    if (articleEl) articleEl.innerHTML = '<p class="text-charcoal-500 text-sm col-span-full">Cargando…</p>';
+    try {
+      const articles = await supabaseApi.getArticleByTitleFilter(articleFilter);
+      cachedArticles = articles;
+      renderArticleList(articles, articleFilter);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Error al cargar";
+      showToast(msg);
+      if (articleEl) articleEl.innerHTML = `<p class="text-red-600 text-sm col-span-full">${escapeHtml(msg)}</p>`;
+    }
+  }
+
+  async function loadLists() {
+    const newsEl = document.getElementById("admin-news-list");
+    const articleEl = document.getElementById("admin-article-list");
+    const newsFilter = (document.getElementById("admin-news-filter") as HTMLInputElement)?.value || "";
+    const articleFilter = (document.getElementById("admin-article-filter") as HTMLInputElement)?.value || "";
+
+    if (newsEl) newsEl.innerHTML = '<p class="text-charcoal-500 text-sm col-span-full">Cargando…</p>';
+    if (articleEl) articleEl.innerHTML = '<p class="text-charcoal-500 text-sm col-span-full">Cargando…</p>';
+
+    try {
+      const [news, articles] = await Promise.all([
+        supabaseApi.getNewsByTitleFilter(newsFilter),
+        supabaseApi.getArticleByTitleFilter(articleFilter),
+      ]);
+      cachedNews = news;
+      cachedArticles = articles;
+      renderNewsList(news, newsFilter);
+      renderArticleList(articles, articleFilter);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Error al cargar";
+      showToast(msg);
+      if (newsEl)
+        newsEl.innerHTML = `<p class="text-red-600 text-sm col-span-full">${escapeHtml(msg)}</p>`;
+      if (articleEl)
+        articleEl.innerHTML = `<p class="text-red-600 text-sm col-span-full">${escapeHtml(msg)}</p>`;
+    }
+  }
+
+  function openCreateModal(kind: "noticia" | "articulo") {
+    const modal = document.getElementById(MODAL_ID);
+    if (!modal) return;
+    modal.setAttribute("data-edit-pk", "");
+    modal.setAttribute("data-edit-type", "");
+    if (typeof (window as any).clearInsightEditor === "function") {
+      (window as any).clearInsightEditor();
+    }
+    const form = document.getElementById("create-insight-form");
+    const titleEl = document.getElementById("create-insight-title");
+    const titleInput = form?.querySelector('input[name="title"]') as HTMLInputElement;
+    const imageInput = document.getElementById("insight-image") as HTMLInputElement;
+    const fileInput = document.getElementById("insight-image-file") as HTMLInputElement;
+    const authorSelect = form?.querySelector('select[name="author"]') as HTMLSelectElement;
+    if (titleInput) titleInput.value = "";
+    if (imageInput) imageInput.value = "";
+    if (fileInput) fileInput.value = "";
+    if (authorSelect) authorSelect.value = "";
+    modal.setAttribute("data-default-kind", kind);
+    if (form) {
+      const kindInput = form.querySelector(
+        'input[name="kind"]',
+      ) as HTMLInputElement;
+      if (kindInput) kindInput.value = kind;
+    }
+    if (titleEl)
+      titleEl.textContent =
+        kind === "noticia" ? "Nueva noticia" : "Nuevo artículo";
+    if (titleInput)
+      titleInput.placeholder =
+        kind === "noticia" ? "Título de la noticia" : "Título del artículo";
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => {
+      document.dispatchEvent(new CustomEvent("init-insight-editor"));
+    });
+  }
+
+  function setup() {
+    if (supabaseAuth.isAuthenticated()) {
+      showPanel();
+    } else {
+      showLogin();
+    }
+
+    document
+      .getElementById("admin-login-form")
+      ?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const form = e.target as HTMLFormElement;
+        const email =
+          (
+            form.querySelector('[name="email"]') as HTMLInputElement
+          )?.value?.trim() ?? "";
+        const password =
+          (form.querySelector('[name="password"]') as HTMLInputElement)
+            ?.value ?? "";
+        const errEl = document.getElementById("admin-login-error");
+        if (errEl) {
+          errEl.classList.add("hidden");
+          errEl.textContent = "";
+        }
+        try {
+          await supabaseAuth.login({ email, password });
+          showPanel();
+        } catch (err) {
+          if (errEl) {
+            errEl.textContent =
+              err instanceof Error ? err.message : "Error al iniciar sesión";
+            errEl.classList.remove("hidden");
+          }
+        }
+      });
+
+    document.getElementById("admin-logout")?.addEventListener("click", () => {
+      supabaseAuth.logout();
+      showLogin();
+    });
+
+    document.querySelectorAll("[data-open-create]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const kind = (btn as HTMLElement).getAttribute("data-open-create") as
+          | "noticia"
+          | "articulo";
+        if (kind === "noticia" || kind === "articulo") openCreateModal(kind);
+      });
+    });
+
+    window.addEventListener("insight-create-submit", async (e: Event) => {
+      const { kind, apiPayload } = (e as CustomEvent).detail as {
+        kind: string;
+        apiPayload: { title: string; content: string; image?: string; author?: string };
+      };
+      try {
+        if (kind === "noticia") {
+          await supabaseApi.createNews(apiPayload);
+        } else if (kind === "articulo") {
+          await supabaseApi.createArticle(apiPayload);
+        }
+        await loadLists();
+      } catch (err) {
+        showToast(err instanceof Error ? err.message : "Error al guardar");
+      }
+    });
+
+    window.addEventListener("insight-edit-submit", async (e: Event) => {
+      const { kind, pk, apiPayload } = (e as CustomEvent).detail as {
+        kind: string;
+        pk: number;
+        apiPayload: { title: string; content: string; image?: string; author?: string };
+      };
+      try {
+        if (kind === "noticia") {
+          await supabaseApi.updateNews(pk, apiPayload);
+        } else if (kind === "articulo") {
+          await supabaseApi.updateArticle(pk, apiPayload);
+        }
+        await loadLists();
+      } catch (err) {
+        showToast(err instanceof Error ? err.message : "Error al actualizar");
+      }
+    });
+
+    let newsFilterTimeout: ReturnType<typeof setTimeout> | null = null;
+    let articleFilterTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    document.getElementById("admin-news-filter")?.addEventListener("input", () => {
+      if (newsFilterTimeout) clearTimeout(newsFilterTimeout);
+      newsFilterTimeout = setTimeout(loadNewsOnly, 300);
+    });
+    document.getElementById("admin-article-filter")?.addEventListener("input", () => {
+      if (articleFilterTimeout) clearTimeout(articleFilterTimeout);
+      articleFilterTimeout = setTimeout(loadArticlesOnly, 300);
+    });
+
+    document.querySelectorAll("[data-close-delete-modal]").forEach((el) => {
+      el.addEventListener("click", closeDeleteModal);
+    });
+
+    document.getElementById("admin-delete-confirm")?.addEventListener("click", async () => {
+      if (!pendingDelete) return;
+      const { pk, type } = pendingDelete;
+      closeDeleteModal();
+      try {
+        if (type === "news") {
+          await supabaseApi.deleteNews(pk);
+        } else {
+          await supabaseApi.deleteArticle(pk);
+        }
+        await loadLists();
+      } catch (err) {
+        showToast(err instanceof Error ? err.message : "Error al eliminar");
+      }
+    });
+
+    document.getElementById("admin-toast-close")?.addEventListener("click", closeToast);
+
+    document.getElementById("admin-news-list")?.addEventListener("click", async (e) => {
+      const target = e.target as HTMLElement;
+      const editBtn = target.closest(".admin-btn-edit");
+      const deleteBtn = target.closest(".admin-btn-delete");
+      if (editBtn) {
+        e.preventDefault();
+        const pk = parseInt(editBtn.getAttribute("data-edit-pk") || "0", 10);
+        const type = editBtn.getAttribute("data-edit-type");
+        if (!pk || type !== "news") return;
+        try {
+          const row = await supabaseApi.getNewsByPk(pk);
+          if (row) {
+            window.dispatchEvent(
+              new CustomEvent("open-edit-insight-modal", {
+                detail: { row: { pk: row.pk, title: row.title, content: row.content || "", image: row.image, author: row.author }, type: "news" },
+              }),
+            );
+          }
+        } catch (err) {
+          showToast(err instanceof Error ? err.message : "Error al cargar");
+        }
+      } else if (deleteBtn) {
+        e.preventDefault();
+        const pk = parseInt(deleteBtn.getAttribute("data-delete-pk") || "0", 10);
+        const type = deleteBtn.getAttribute("data-delete-type");
+        const title = deleteBtn.getAttribute("data-delete-title") || "este elemento";
+        if (!pk || type !== "news") return;
+        openDeleteModal(pk, "news", title);
+      }
+    });
+
+    document.getElementById("admin-article-list")?.addEventListener("click", async (e) => {
+      const target = e.target as HTMLElement;
+      const editBtn = target.closest(".admin-btn-edit");
+      const deleteBtn = target.closest(".admin-btn-delete");
+      if (editBtn) {
+        e.preventDefault();
+        const pk = parseInt(editBtn.getAttribute("data-edit-pk") || "0", 10);
+        const type = editBtn.getAttribute("data-edit-type");
+        if (!pk || type !== "article") return;
+        try {
+          const row = await supabaseApi.getArticleByPk(pk);
+          if (row) {
+            window.dispatchEvent(
+              new CustomEvent("open-edit-insight-modal", {
+                detail: { row: { pk: row.pk, title: row.title, content: row.content || "", image: row.image, author: row.author }, type: "article" },
+              }),
+            );
+          }
+        } catch (err) {
+          showToast(err instanceof Error ? err.message : "Error al cargar");
+        }
+      } else if (deleteBtn) {
+        e.preventDefault();
+        const pk = parseInt(deleteBtn.getAttribute("data-delete-pk") || "0", 10);
+        const type = deleteBtn.getAttribute("data-delete-type");
+        const title = deleteBtn.getAttribute("data-delete-title") || "este elemento";
+        if (!pk || type !== "article") return;
+        openDeleteModal(pk, "article", title);
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", setup);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setup);
+  } else {
+    setup();
+  }
+</script>
