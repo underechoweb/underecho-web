@@ -1,0 +1,21 @@
+/**
+ * Configuración global del sitio
+ * Centraliza información SEO y metadatos
+ */
+const WHATSAPP_NUMBER = '573180699745';
+
+export const SITE_CONFIG = {
+  name: 'UnDerecho',
+  title: 'UnDerecho - Asesoría Jurídica Online | Trámites y Defensa',
+  description: 'Asesoría jurídica online. Te ayudamos con trámites, procesos legales y administrativos. Protección al consumidor, derechos de petición y más.',
+  url: 'https://underecho.online',
+  lang: 'es',
+  locale: 'es_CO',
+  author: 'UnDerecho',
+  ogImage: '/og-image.jpg',
+  whatsappNumber: WHATSAPP_NUMBER,
+  whatsappUrl: `https://wa.me/${WHATSAPP_NUMBER}`,
+  whatsappUrlConsulta: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, me gustaría agendar una consulta.')}`,
+} as const;
+
+export type SiteConfig = typeof SITE_CONFIG;
