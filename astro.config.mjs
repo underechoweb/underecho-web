@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -8,7 +9,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind()],
+  site: 'https://underecho.com.co',
+  integrations: [tailwind(), sitemap()],
   vite: {
     resolve: {
       alias: {
@@ -22,6 +24,7 @@ export default defineConfig({
         '@/config': path.resolve(__dirname, './src/config'),
         '@/styles': path.resolve(__dirname, './src/styles'),
         '@/assets': path.resolve(__dirname, './src/assets'),
+        '@/utils': path.resolve(__dirname, './src/utils'),
       },
     },
   },
