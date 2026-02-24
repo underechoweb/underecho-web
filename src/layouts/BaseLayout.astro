@@ -5,6 +5,7 @@ import Footer from '@/components/Footer.astro';
 import { SITE_CONFIG } from '@/config/site';
 import faviconLight from '@/assets/logo_original_sin_letra.svg?url';
 import faviconDark from '@/assets/logo_modo_oscuro_1.svg?url';
+import ogImageAsset from '@/assets/logo_slot.webp';
 
 import type { BaseLayoutProps } from '@/types';
 
@@ -17,6 +18,7 @@ const {
   canonical,
 } = Astro.props;
 
+const effectiveOgImage = (ogImage === SITE_CONFIG.ogImage ? ogImageAsset.src : ogImage) as string;
 const canonicalURL = canonical || new URL(Astro.url.pathname, SITE_CONFIG.url).href;
 ---
 
@@ -40,7 +42,7 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, SITE_CONFIG.url).h
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(ogImage, SITE_CONFIG.url).href} />
+    <meta property="og:image" content={new URL(effectiveOgImage, SITE_CONFIG.url).href} />
     <meta property="og:locale" content={SITE_CONFIG.locale} />
     <meta property="og:site_name" content={SITE_CONFIG.name} />
     
@@ -48,7 +50,7 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, SITE_CONFIG.url).h
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(ogImage, SITE_CONFIG.url).href} />
+    <meta name="twitter:image" content={new URL(effectiveOgImage, SITE_CONFIG.url).href} />
     
     <!-- Preconnect para fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,6 +60,7 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, SITE_CONFIG.url).h
     <!-- The Seasons - Para títulos (requiere licencia de Adobe Fonts u otra fuente) -->
     <!-- Si tienes la licencia, descomenta y carga The Seasons aquí -->
     <!-- <link rel="stylesheet" href="https://use.typekit.net/[TU_ID].css" /> -->
+    <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />

@@ -7,6 +7,19 @@ import { SITE_CONFIG } from "@/config/site";
 const whatsappConsulta = SITE_CONFIG.whatsappUrlConsulta;
 import ctaImage from "@/assets/cta.webp";
 
+const legalServiceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": SITE_CONFIG.name,
+  "description": SITE_CONFIG.description,
+  "url": SITE_CONFIG.url,
+  "telephone": `+${SITE_CONFIG.whatsappNumber}`,
+  "email": "underecho.abog@gmail.com",
+  "image": new URL(SITE_CONFIG.ogImage, SITE_CONFIG.url).href,
+  "areaServed": { "@type": "Country", "name": "Colombia" },
+  "sameAs": [SITE_CONFIG.youtubeUrl],
+};
+
 const ctaItems = [
   {
     title: "Consultas virtuales, ágiles y seguras",
@@ -32,6 +45,7 @@ const ctaItems = [
 ---
 
 <BaseLayout title={SITE_CONFIG.title} description={SITE_CONFIG.description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(legalServiceJsonLd)} />
   <Hero
     title="Justicia y seguridad a su alcance"
     subtitle="Comprometidos con su tranquilidad y confianza."
