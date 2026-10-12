@@ -24,7 +24,7 @@ export function mapNewsRowToCard(row: NewsRow): CardItemProps {
     imageAlt   : row.title,
     href       : `/noticias/ver?pk=${row.pk}`,
     date       : new Date(row.created_at),
-    author     : row.author || 'Equipo UnDerecho',
+    author     : row.author || 'Equipo Fierro Fermat',
     tag        : 'Noticias',
   };
 }
@@ -38,7 +38,7 @@ export function mapArticleRowToCard(row: ArticleRow): CardItemProps {
     imageAlt   : row.title,
     href       : `/articulos/ver?pk=${row.pk}`,
     date       : new Date(row.created_at),
-    author     : row.author || 'Equipo UnDerecho',
+    author     : row.author || 'Equipo Fierro Fermat',
     tag        : 'Artículos',
   };
 }

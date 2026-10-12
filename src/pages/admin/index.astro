@@ -4,7 +4,7 @@ import CreateInsightModal from "@/components/CreateInsightModal.astro";
 ---
 
 <BaseLayout
-  title="Panel editor - UnDerecho"
+  title="Panel editor - Fierro Fermat"
   description="Acceso restringido a editores."
 >
   <main class="min-h-screen bg-beige-100 py-12">
@@ -324,7 +324,7 @@ import CreateInsightModal from "@/components/CreateInsightModal.astro";
     const href = `/admin/ver?type=${type}&pk=${row.pk}`;
     const desc = stripHtml(row.content || "") || row.title;
     const dateStr = formatDate(row.created_at);
-    const author = row.author || "Equipo UnDerecho";
+    const author = row.author || "Equipo Fierro Fermat";
     return `
     <article class="bg-beige-50 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col border border-beige-200 hover:border-gold-300">
       <a href="${escapeHtml(href)}" class="block flex flex-col focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 rounded-t-lg">
