@@ -1,6 +1,7 @@
 ---
 import { SITE_CONFIG } from "@/config/site";
-import logoHeader from "@/assets/cabecera/logo-lateral-cabecera-sin-fondo.webp";
+import { Image } from "astro:assets";
+import logoCabecera from "@/assets/fierrofermat/logo_cabecera.png";
 
 const navLinks = [
   { href: "/", label: "Inicio" },
@@ -23,17 +24,18 @@ const navLinks = [
         class="flex items-center focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded"
         aria-label={`${SITE_CONFIG.name} - Ir al inicio`}
       >
-        <img
-          src={logoHeader.src}
+        <Image
+          src={logoCabecera}
           alt={SITE_CONFIG.name}
-          class="h-8 md:h-9 lg:h-10 w-auto shrink-0 object-contain"
-          width={logoHeader.width}
-          height={logoHeader.height}
+          widths={[240, 400, 720]}
+          sizes="(min-width: 1280px) 334px, (min-width: 1024px) 300px, 234px"
+          class="h-7 md:h-6 lg:h-9 xl:h-10 w-auto shrink-0 object-contain"
+          loading="eager"
         />
       </a>
 
       <!-- Desktop Navigation -->
-      <ul class="hidden md:flex items-center gap-8 lg:gap-10" role="menubar">
+      <ul class="hidden md:flex items-center gap-3 lg:gap-8 xl:gap-10" role="menubar">
         {
           navLinks.map((link) => (
             <li role="none">
@@ -111,12 +113,12 @@ const navLinks = [
         class="flex items-center"
         aria-label={`${SITE_CONFIG.name} - Ir al inicio`}
       >
-        <img
-          src={logoHeader.src}
+        <Image
+          src={logoCabecera}
           alt={SITE_CONFIG.name}
-          class="h-8 w-auto shrink-0 object-contain"
-          width={logoHeader.width}
-          height={logoHeader.height}
+          widths={[240, 480]}
+          sizes="234px"
+          class="h-7 w-auto shrink-0 object-contain"
         />
       </a>
       <button

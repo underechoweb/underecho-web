@@ -5,7 +5,7 @@ import SectionWrap from "@/components/SectionWrap.astro";
 import CTA from "@/components/CTA.astro";
 import { SITE_CONFIG } from "@/config/site";
 const whatsappConsulta = SITE_CONFIG.whatsappUrlConsulta;
-import ctaImage from "@/assets/cta.webp";
+import ctaImage from "@/assets/cta.png";
 
 const legalServiceJsonLd = {
   "@context": "https://schema.org",
@@ -14,7 +14,7 @@ const legalServiceJsonLd = {
   "description": SITE_CONFIG.description,
   "url": SITE_CONFIG.url,
   "telephone": `+${SITE_CONFIG.whatsappNumber}`,
-  "email": "underecho.abog@gmail.com",
+  "email": "fierrofermat@gmail.com",
   "image": new URL(SITE_CONFIG.ogImage, SITE_CONFIG.url).href,
   "areaServed": { "@type": "Country", "name": "Colombia" },
   "sameAs": [SITE_CONFIG.youtubeUrl],
@@ -28,7 +28,7 @@ const ctaItems = [
   },
   {
     title: "Acompañamiento humano y honesto",
-    description: "En UD no hay promesas imposibles. Te decimos la verdad y te explicamos tus opciones con claridad y responsabilidad. Tu caso no es una estadística, es nuestro compromiso.",
+    description: "En Fierro Fermat no hay promesas imposibles. Te decimos la verdad y te explicamos tus opciones con claridad y responsabilidad. Tu caso no es una estadística, es nuestro compromiso.",
     icon: "people",
   },
   {
@@ -58,7 +58,7 @@ const ctaItems = [
       <div class="relative lg:w-[55%] min-h-[320px] lg:min-h-0">
         <img
           src={ctaImage.src}
-          alt="Profesional de Un Derecho en oficina"
+          alt="Profesional de Fierro Fermat en oficina"
           class="absolute inset-0 w-full h-full object-cover object-center"
           loading="eager"
         />
@@ -143,7 +143,7 @@ const ctaItems = [
           Nosotros
         </h2>
         <p class="text-lg text-charcoal-500 mb-4 leading-relaxed">
-          Un Derecho es una firma de abogados conformada por un equipo de
+          Fierro Fermat es una firma de abogados conformada por un equipo de
           profesionales con sólida formación y experiencia, orientados al
           ejercicio responsable y estratégico del derecho.
         </p>
@@ -166,7 +166,7 @@ const ctaItems = [
         </div>
         <img
           src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop"
-          alt="Equipo de UnDerecho"
+          alt="Equipo de Fierro Fermat"
           class="relative rounded-lg shadow-xl w-full"
           loading="lazy"
         />

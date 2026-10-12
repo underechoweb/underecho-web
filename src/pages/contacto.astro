@@ -1,15 +1,16 @@
 ---
 import PlainLayout from "@/layouts/PlainLayout.astro";
 import { SITE_CONFIG } from "@/config/site";
-import logo_original from "@/assets/sin_fondo/logo_original.webp";
+import { Image } from "astro:assets";
+import logoContacto from "@/assets/fierrofermat/logo_contacto.png";
 
-const title = "Contacto - UnDerecho";
+const title = "Contacto - Fierro Fermat";
 const description =
   "Contáctanos y recibe una primera orientación gratuita. Juntos haremos que tus derechos sean escuchados.";
 
 const whatsappNumber = "573180699745";
 const whatsappDisplay = "+57 318 0699745";
-const email = "underecho.abog@gmail.com";
+const email = "fierrofermat@gmail.com";
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 ---
 
@@ -17,16 +18,16 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}`;
   <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
       <section
-        class="flex flex-col items-center text-center mb-8 lg:mb-0"
+        class="flex flex-col items-center lg:justify-center text-center mb-8 lg:mb-0"
         aria-labelledby="contact-info-title"
       >
         <div>
-          <img
-            src={logo_original.src}
+          <Image
+            src={logoContacto}
             alt={SITE_CONFIG.name}
-            class="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto mx-auto"
-            width={logo_original.width}
-            height={logo_original.height}
+            widths={[256, 384, 512, 768]}
+            sizes="(min-width: 1024px) 384px, (min-width: 768px) 320px, 256px"
+            class="w-full max-w-[16rem] md:max-w-[20rem] lg:max-w-sm h-auto mx-auto mb-8"
             loading="eager"
           />
         </div>
@@ -73,7 +74,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
           <div>
             <p class="text-gray-900 font-bold text-base md:text-lg">
-              Razón social: Un Derecho SAS - NIT 901980569 0
+              Estudio jurídico
             </p>
           </div>
         </div>
@@ -228,7 +229,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}`;
           </div>
 
           <p class="text-xs text-gray-600">
-            Los datos personales facilitados serán tratados por Un Derecho como
+            Los datos personales facilitados serán tratados por Fierro Fermat como
             responsable del tratamiento, con la finalidad de atender su
             solicitud y remitirle información comercial relacionada con nuestros
             servicios. Puede ejercer sus derechos de acceso, rectificación,

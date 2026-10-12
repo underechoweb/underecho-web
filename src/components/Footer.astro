@@ -1,9 +1,10 @@
 ---
 import { SITE_CONFIG } from "@/config/site";
-import logo_original from "@/assets/sin_fondo/logo_original.webp";
+import { Image } from "astro:assets";
+import logoFooter from "@/assets/fierrofermat/logo_footer.png";
 
 const currentYear = new Date().getFullYear();
-const email = "underecho.abog@gmail.com";
+const email = "fierrofermat@gmail.com";
 const whatsappNumber = "573180699745";
 const whatsappDisplay = "+57 318 0699745";
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
@@ -14,10 +15,10 @@ const legalLinks = [
 ];
 
 const socialLinks = [
-  { name: "Instagram", href: "https://www.instagram.com/un.derecho/", icon: "instagram" },
-  { name: "Facebook", href: "https://web.facebook.com/people/Un-Derecho/61577519450590/?rdid=3ccSvViQpP2FPJVI&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F17tYEuzaMk%2F%3F_rdc%3D1%26_rdr", icon: "facebook" },
-  { name: "TikTok", href: "https://www.tiktok.com/@un.derecho?_r=1&_t=ZS-93PG0UFQ6ps", icon: "tiktok" },
-  { name: "LinkedIn", href: "https://www.linkedin.com/company/un-derecho/", icon: "linkedin" },
+  { name: "Instagram", href: "https://www.instagram.com/fierrofermat?obrf=b3kwOWd4djUzOTNn", icon: "instagram" },
+  { name: "Facebook", href: "https://www.facebook.com/share/19mSP82ix7/?mibextid=wwXIfr", icon: "facebook" },
+  { name: "TikTok", href: "https://www.tiktok.com/@fierrofermat", icon: "tiktok" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/fierro-fermat/", icon: "linkedin" },
   { name: "YouTube", href: SITE_CONFIG.youtubeUrl, icon: "youtube" },
 ];
 
@@ -95,28 +96,28 @@ const serviciosFooter = [
               d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
             ></path>
           </svg>
-          <span class="text-white group-hover:text-gold-400">Un Derecho SAS - NIT 901980569 0</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
     <div class="flex flex-col lg:flex-row gap-4 lg:gap-12">
       <div
-        class="flex flex-col items-center justify-center lg:flex-shrink-0 lg:w-1/3"
+        class="flex flex-col items-center justify-center lg:flex-shrink-0 lg:w-1/4"
       >
         <a
           href="/"
-          class="mb-4 lg:mb-6"
+          class="mb-2 lg:mb-0"
           aria-label={`${SITE_CONFIG.name} - Ir al inicio`}
         >
-          <img
-            src={logo_original.src}
+          <Image
+            src={logoFooter}
             alt={SITE_CONFIG.name}
-            class="h-20 md:h-28 lg:h-32 w-auto max-w-[260px] md:max-w-[320px] lg:max-w-[380px]"
-            width={logo_original.width}
-            height={logo_original.height}
+            widths={[160, 224, 320, 448]}
+            sizes="(min-width: 1024px) 224px, (min-width: 768px) 192px, 160px"
+            class="w-40 md:w-48 lg:w-56 h-auto"
+            loading="lazy"
           />
         </a>
       </div>
@@ -224,7 +225,7 @@ const serviciosFooter = [
     </div>
 
     <div
-      class="border-t border-charcoal-700 mt-8 md:mt-12 pt-6 text-center text-sm text-charcoal-300"
+      class="border-t border-charcoal-700 mt-6 md:mt-8 pt-4 text-center text-sm text-charcoal-300"
     >
       <p>
         &copy; {currentYear}

@@ -11,7 +11,7 @@ function stripHtml(html: string): string {
 }
 
 function toAbsoluteImageUrl(image: string | undefined): string {
-  if (!image || !image.trim()) return new URL(SITE_CONFIG.ogImage, SITE_CONFIG.url).href;
+  if (!image || !image.trim()) return new URL(SITE_CONFIG.logo, SITE_CONFIG.url).href;
   if (image.startsWith('http://') || image.startsWith('https://')) return image;
   return new URL(image, SITE_CONFIG.url).href;
 }
@@ -37,7 +37,7 @@ function injectArticleJsonLd(params: {
 }): void {
   document.getElementById(ARTICLE_SCRIPT_ID)?.remove();
 
-  const publisherLogo = new URL(SITE_CONFIG.ogImage, SITE_CONFIG.url).href;
+  const publisherLogo = new URL(SITE_CONFIG.logo, SITE_CONFIG.url).href;
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -109,7 +109,7 @@ export function updatePageMeta({ title, content, image, section, author, datePub
     headline: title,
     description,
     imageUrl,
-    author: author || 'Equipo UnDerecho',
+    author: author || 'Equipo Fierro Fermat',
     datePublished: datePublished || new Date().toISOString().slice(0, 10),
     url: typeof window !== 'undefined' ? window.location.href : '',
   });
