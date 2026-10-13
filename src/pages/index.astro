@@ -5,6 +5,7 @@ import SectionWrap from "@/components/SectionWrap.astro";
 import CTA from "@/components/CTA.astro";
 import { SITE_CONFIG } from "@/config/site";
 const whatsappConsulta = SITE_CONFIG.whatsappUrlConsulta;
+import { Image } from "astro:assets";
 import ctaImage from "@/assets/cta.png";
 
 const legalServiceJsonLd = {
@@ -54,13 +55,15 @@ const ctaItems = [
   />
 
   <section id="mensaje-principal" class="relative overflow-hidden">
-    <div class="flex flex-col lg:flex-row min-h-[500px] lg:min-h-[600px]">
-      <div class="relative lg:w-[55%] min-h-[320px] lg:min-h-0">
-        <img
-          src={ctaImage.src}
-          alt="Profesional de Fierro Fermat en oficina"
-          class="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager"
+    <div class="flex flex-col lg:flex-row lg:min-h-[600px]">
+      <div class="relative lg:w-[55%] aspect-[1678/937] lg:aspect-auto">
+        <Image
+          src={ctaImage}
+          alt="Recepción de la oficina de Fierro Fermat"
+          widths={[640, 960, 1280, 1678]}
+          sizes="(min-width: 1024px) 55vw, 100vw"
+          class="absolute inset-0 w-full h-full object-cover object-center lg:object-[30%_center]"
+          loading="lazy"
         />
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 md:bottom-8 z-10 w-[calc(100%-2rem)] max-w-[280px] sm:max-w-none sm:w-auto">
           <a href={whatsappConsulta} target="_blank" rel="noopener noreferrer" class="btn-primary !text-white inline-block w-full sm:w-auto text-center text-sm sm:text-base md:text-lg px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-4 whitespace-normal">

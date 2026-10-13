@@ -10,7 +10,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // https://astro.build/config
 export default defineConfig({
   site: 'https://fierrofermat.com',
-  integrations: [tailwind(), sitemap()],
+  integrations: [
+    tailwind(),
+    sitemap({ filter: (page) => !page.includes('/admin') }),
+  ],
   vite: {
     resolve: {
       alias: {
