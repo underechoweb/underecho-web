@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
   name: 'Fierro Fermat',
   title: 'Fierro Fermat - Asesoría Jurídica Online | Trámites y Defensa',
   description: 'Asesoría jurídica online. Te ayudamos con trámites, procesos legales y administrativos. Protección al consumidor, derechos de petición y más.',
-  url: 'https://underecho.com.co',
+  url: 'https://fierrofermat.com',
   lang: 'es',
   locale: 'es_CO',
   author: 'Fierro Fermat',
