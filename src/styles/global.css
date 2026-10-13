@@ -26,7 +26,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-500 text-white px-8 py-4 rounded-lg font-bold text-lg uppercase tracking-wide hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-lg no-underline;
+    @apply inline-block text-center bg-primary-500 text-white px-6 py-3 text-base md:px-8 md:py-4 md:text-lg rounded-lg font-bold uppercase tracking-wide hover:bg-primary-600 focus:outline-none focus:ring-4 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 shadow-lg no-underline;
   }
 
   .btn-secondary {
