@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://underecho.com.co',
+  site: 'https://fierrofermat.com',
   integrations: [tailwind(), sitemap()],
   vite: {
     resolve: {
