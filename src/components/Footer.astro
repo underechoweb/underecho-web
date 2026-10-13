@@ -101,10 +101,10 @@ const serviciosFooter = [
     </div>
   </div>
 
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
-    <div class="flex flex-col lg:flex-row gap-4 lg:gap-12">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 pt-6 md:pt-8">
+    <div class="flex flex-col lg:flex-row gap-4 lg:gap-8">
       <div
-        class="flex flex-col items-center justify-center lg:flex-shrink-0 lg:w-1/4"
+        class="flex flex-col items-center justify-center lg:flex-shrink-0 lg:w-1/5"
       >
         <a
           href="/"
@@ -122,13 +122,13 @@ const serviciosFooter = [
         </a>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 flex-1 w-full">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8 flex-1 w-full">
         <!-- Columna 1: Legal -->
         <div class="flex flex-col items-center md:items-start w-full min-w-0">
-          <h3 class="text-gold-400 font-semibold mb-4 text-lg uppercase tracking-wide">
+          <h3 class="text-gold-400 font-semibold mb-3 text-base xl:text-lg uppercase tracking-wide whitespace-nowrap">
             Legal
           </h3>
-          <ul class="space-y-2 w-full">
+          <ul class="space-y-1.5 w-full">
             {legalLinks.map((link) => (
               <li class="flex justify-center md:justify-start">
                 <a
@@ -145,10 +145,10 @@ const serviciosFooter = [
 
         <!-- Columna 2: Redes -->
         <div class="flex flex-col items-center md:items-start w-full min-w-0">
-          <h3 class="text-gold-400 font-semibold mb-4 text-lg uppercase tracking-wide">
+          <h3 class="text-gold-400 font-semibold mb-3 text-base xl:text-lg uppercase tracking-wide whitespace-nowrap">
             Redes
           </h3>
-          <ul class="space-y-2 w-full">
+          <ul class="space-y-1.5 w-full">
             {socialLinks.map((social) => (
               <li class="flex justify-center md:justify-start">
                 <a
@@ -168,10 +168,10 @@ const serviciosFooter = [
 
         <!-- Columna 3: Nuestros Servicios -->
         <div class="flex flex-col items-center md:items-start w-full min-w-0">
-          <h3 class="text-gold-400 font-semibold mb-4 text-lg uppercase tracking-wide">
+          <h3 class="text-gold-400 font-semibold mb-3 text-base xl:text-lg uppercase tracking-wide whitespace-nowrap">
             Nuestros Servicios
           </h3>
-          <ul class="space-y-2 w-full">
+          <ul class="space-y-1.5 w-full">
             {serviciosFooter.map((s) => (
               <li class="flex justify-center md:justify-start">
                 <a
@@ -188,10 +188,10 @@ const serviciosFooter = [
 
         <!-- Columna 4: Sobre la Firma -->
         <div class="flex flex-col items-center md:items-start w-full min-w-0">
-          <h3 class="text-gold-400 font-semibold mb-4 text-lg uppercase tracking-wide">
+          <h3 class="text-gold-400 font-semibold mb-3 text-base xl:text-lg uppercase tracking-wide whitespace-nowrap">
             Sobre la Firma
           </h3>
-          <ul class="space-y-2 w-full">
+          <ul class="space-y-1.5 w-full">
             <li class="flex justify-center md:justify-start">
               <a
                 href="/noticias"
@@ -225,7 +225,7 @@ const serviciosFooter = [
     </div>
 
     <div
-      class="border-t border-charcoal-700 mt-6 md:mt-8 pt-4 text-center text-sm text-charcoal-300"
+      class="border-t border-charcoal-700 mt-6 py-3 text-center text-sm text-charcoal-300"
     >
       <p>
         &copy; {currentYear}
